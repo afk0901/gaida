@@ -1,1 +1,1 @@
-# Hagnýt gæða stjórnun og prófanir
+# Hagnýt gæðastjórnun og prófanir
