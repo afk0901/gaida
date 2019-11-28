@@ -2,16 +2,17 @@
 This assignment was about using docker. 
 Creating images, build them and run the containers a
 nd expose one container outside that container. 
-It's about the very fundamentals of docker. These questions then are to
-get you to think about what it is that we are using.
+It's about the very fundamentals of docker. These questions are to
+get people to think about what it is and how it works.
 
 ## What is Docker?
 Docker makes it easier to create, deploy and run applications by using containers. 
-Because containers are totally isolated and thinks he is alone in the world and 
+Because containers are totally isolated and it thinks it's alone in the world and 
 it's possible to share resources with containers on the same machine, 
 then docker also reduce a lot of cost. It simplifies deploying configurations 
 because it's easy to tear them down and up and change them at any time. It's also
-no need to install things as it's possible to have docker to do it for you.  
+no need to install things as it's possible to have docker to do it for you.
+Docker also always remains the same, no need to make a docker file for each deployment stage.
 
 ## What is the difference between:
 * Virtual Machine
@@ -24,11 +25,12 @@ depended on the hardware and the OS. VM machines act like many OS on the same co
 therefore slower, takes time to setup and sometimes daunting to do and wastes resources.
   
 On the other hand a docker container is a system process, so it shares the operating system,
-boots fast and is easy to tear down and run up again in seconds and are very lightweight
-because of this. 
+boots fast and is easy to tear down and run up again in seconds and are very lightweight.
+
 Still they remain in isolation like VMs do, so the benefits of VMs, that they are isolated 
 is achived. In both cases a "clean" machines are created and containers save resources 
 becuse they are only processes. On the other hand, VMs may be more secure in some cases.
+With Docker it's also easier to have the same configuration file through the development pipeline.
 
 A image is like a blueprint of how the container should behave. It's a set of configurations
 that makes up the container, such as installing dependencies, environment variables and how
@@ -42,7 +44,7 @@ resources from the server via HTTP and is widelly used today. Many of them use h
 to prevent the client from breaking.
 
 ## Postgres?
-Postgres is a docker image that offers the PostgreSQL object-relational SQL database system. 
+Postgres is a  PostgreSQL object-relational SQL database system. 
 It's a yet another way to create, store and read data with the help of SQL. 
 It's open source and free. Many people like it's architecture, data integrity, 
 reliability and so on. Postgres is also often used as another name for PostgreSQL  

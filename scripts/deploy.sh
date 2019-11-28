@@ -1,5 +1,6 @@
 #!/bin/bash
-cd .. #Moving one above where teraform is installed
+#Moving to the directory where Terraform is installed and its configuration files
+cd ..
 ./terraform init #Initalize Terraform so its possible to use it
 ./terraform destroy -auto-approve #Destroys all instances managed by Terraform
 ./terraform plan #Show the execution plan

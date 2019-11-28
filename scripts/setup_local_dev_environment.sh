@@ -1,10 +1,11 @@
 #!/bin/bash
 
-#This script installs Git, NodeJS and Aws
+#This script installs Git, NodeJS, Aws and Terraform
 #the OS used is Linux (debian) with Ubuntu Mate
 
 #Date when the script started with seconds
 NOW=`date +"%c"`
+cd .. #So everything is installed in the correct directory
 
 #Update the package list if needed
 sudo apt-get update
@@ -68,14 +69,32 @@ echo "AWS VERSION:"
 aws --version
 }
 
+#Downloads Terraform and exctracts it 
+#(Credit: https://askubuntu.com/questions/983351/how-to-install-terraform-in-ubuntu)
+install_TerraForm()
+{
+echo "INSTALLING TERRAFORM..."
+#So it's possible to unzip the Terraform zip file
+sudo apt-get install unzip 
+#Download Terraform
+wget https://releases.hashicorp.com/terraform/0.12.16/terraform_0.12.16_linux_amd64.zip
+#Unzip Terraform
+unzip terraform_0.12.16_linux_amd64.zip
+#Print Teraform version
+./terraform --version
+echo "DONE INSTALLING TERRAFORM"
+}
+
 #Log the output when installing NodeJS and git
 installNodeJSAndGit | tee -a ./log.txt
 #Install Docker Engine - Community - latest version
-echo "INATALLING DOCKER ENGINE..."
+echo "INSTALLING DOCKER ENGINE..."
 sudo apt-get install docker-ce docker-ce-cli containerd.io
 echo "DONE INSTALLING DOCKER ENGINE"
 echo "DOCKER INFORMATION:"
 docker version
+#Installs Terraform
+install_TerraForm
 echo "SCRIPT ENDED AT:" 
 #Script ended at this date with seconds
 date +"%c" 
