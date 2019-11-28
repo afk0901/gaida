@@ -1,0 +1,148 @@
+SCRIPT STARTED AT:
+fim 28.nóv 2019, 15:02:09 GMT
+Welcome arnar
+This script prints out the type of the operating system, git and NodeJS and prints the version of each one
+Running on: Linux arnar-HP-EliteBook-850-G3 4.15.0-65-generic #74-Ubuntu SMP Tue Sep 17 17:06:04 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+INSTALLING GIT:
+Reading package lists...
+Building dependency tree...
+Reading state information...
+git is already the newest version (1:2.17.1-1ubuntu0.4).
+The following packages were automatically installed and are no longer required:
+  apg cinnamon-control-center-data cinnamon-session-common cjs file-roller
+  gedit-plugins-common gir1.2-accountsservice-1.0 gir1.2-caribou-1.0
+  gir1.2-clutter-1.0 gir1.2-cmenu-3.0 gir1.2-cogl-1.0 gir1.2-coglpango-1.0
+  gir1.2-cvc-1.0 gir1.2-gdesktopenums-3.0 gir1.2-ggit-1.0 gir1.2-gkbd-3.0
+  gir1.2-gnomebluetooth-1.0 gir1.2-gnomedesktop-3.0 gir1.2-gtkclutter-1.0
+  gir1.2-gucharmap-2.90 gir1.2-json-1.0 gir1.2-keybinder-3.0 gir1.2-nm-1.0
+  gir1.2-nma-1.0 gir1.2-upowerglib-1.0 gir1.2-xkl-1.0 gir1.2-zeitgeist-2.0
+  gist gkbd-capplet gnome-backgrounds gnome-control-center-data
+  gnome-panel-data gnome-settings-daemon gnome-user-docs iso-flags-png-320x240
+  libcaribou-common libcaribou0 libcinnamon-control-center1
+  libcinnamon-menu-3-0 libcjs0 libcolord-gtk1 libcompfaceg1 libcscreensaver0
+  libcvc0 libetpan20 libgdm1 libgit2-26 libgit2-glib-1.0-0 libgle3
+  libgnome-bluetooth13 libgnome-menu-3-0 libgnomekbd-common libgnomekbd8
+  libgspell-1-1 libgspell-1-common libibus-1.0-5 libjpeg-turbo-progs
+  libkeybinder-3.0-0 liblockfile-bin liblockfile1 libmozjs-38-0
+  libnemo-extension1 libnss-myhostname libpython3-dev libpython3.6-dev
+  libwhoopsie-preferences0 libzeitgeist-2.0-0 mousetweaks nautilus-data
+  nemo-data python-olefile python-pam python-pil python-pyinotify ruby-json
+  ubuntu-docs whoopsie-preferences xscreensaver-data-extra xscreensaver-gl
+  xscreensaver-gl-extra
+Use 'sudo apt autoremove' to remove them.
+0 uppfærðir, 0 nýlega uppsettir, 0 fjarlægðir og 125 ekki uppfærðir.
+DONE INSTALLING GIT
+SETTING UP PACKAGES TO INSTALL NODE.JS...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+curl is already the newest version (7.58.0-2ubuntu3.8).
+The following packages were automatically installed and are no longer required:
+  apg cinnamon-control-center-data cinnamon-session-common cjs file-roller
+  gedit-plugins-common gir1.2-accountsservice-1.0 gir1.2-caribou-1.0
+  gir1.2-clutter-1.0 gir1.2-cmenu-3.0 gir1.2-cogl-1.0 gir1.2-coglpango-1.0
+  gir1.2-cvc-1.0 gir1.2-gdesktopenums-3.0 gir1.2-ggit-1.0 gir1.2-gkbd-3.0
+  gir1.2-gnomebluetooth-1.0 gir1.2-gnomedesktop-3.0 gir1.2-gtkclutter-1.0
+  gir1.2-gucharmap-2.90 gir1.2-json-1.0 gir1.2-keybinder-3.0 gir1.2-nm-1.0
+  gir1.2-nma-1.0 gir1.2-upowerglib-1.0 gir1.2-xkl-1.0 gir1.2-zeitgeist-2.0
+  gist gkbd-capplet gnome-backgrounds gnome-control-center-data
+  gnome-panel-data gnome-settings-daemon gnome-user-docs iso-flags-png-320x240
+  libcaribou-common libcaribou0 libcinnamon-control-center1
+  libcinnamon-menu-3-0 libcjs0 libcolord-gtk1 libcompfaceg1 libcscreensaver0
+  libcvc0 libetpan20 libgdm1 libgit2-26 libgit2-glib-1.0-0 libgle3
+  libgnome-bluetooth13 libgnome-menu-3-0 libgnomekbd-common libgnomekbd8
+  libgspell-1-1 libgspell-1-common libibus-1.0-5 libjpeg-turbo-progs
+  libkeybinder-3.0-0 liblockfile-bin liblockfile1 libmozjs-38-0
+  libnemo-extension1 libnss-myhostname libpython3-dev libpython3.6-dev
+  libwhoopsie-preferences0 libzeitgeist-2.0-0 mousetweaks nautilus-data
+  nemo-data python-olefile python-pam python-pil python-pyinotify ruby-json
+  ubuntu-docs whoopsie-preferences xscreensaver-data-extra xscreensaver-gl
+  xscreensaver-gl-extra
+Use 'sudo apt autoremove' to remove them.
+0 uppfærðir, 0 nýlega uppsettir, 0 fjarlægðir og 125 ekki uppfærðir.
+
+## Installing the NodeSource Node.js 13.x repo...
+
+
+## Populating apt-get cache...
+
++ apt-get update
+Hit:1 http://is.archive.ubuntu.com/ubuntu bionic InRelease
+Hit:2 http://is.archive.ubuntu.com/ubuntu bionic-updates InRelease
+Hit:3 http://is.archive.ubuntu.com/ubuntu bionic-backports InRelease
+Ign:4 http://dl.google.com/linux/chrome/deb stable InRelease
+Hit:5 http://ppa.launchpad.net/webupd8team/sublime-text-2/ubuntu bionic InRelease
+Hit:6 https://download.docker.com/linux/ubuntu bionic InRelease
+Hit:7 http://dl.google.com/linux/chrome/deb stable Release
+Ign:8 http://ppa.launchpad.net/webupd8team/sublime-text-3/ubuntu bionic InRelease
+Sækja: 9 http://security.ubuntu.com/ubuntu bionic-security InRelease [88,7 kB]
+Villa: 10 http://ppa.launchpad.net/webupd8team/sublime-text-3/ubuntu bionic Release
+  404  Not Found [IP: 91.189.95.83 80]
+Hit:12 https://packagecloud.io/AtomEditor/atom/any any InRelease
+Reading package lists...
+Error executing command, exiting
+INSTALLING NODEJS...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+nodejs is already the newest version (8.10.0~dfsg-2ubuntu0.4).
+The following packages were automatically installed and are no longer required:
+  apg cinnamon-control-center-data cinnamon-session-common cjs file-roller
+  gedit-plugins-common gir1.2-accountsservice-1.0 gir1.2-caribou-1.0
+  gir1.2-clutter-1.0 gir1.2-cmenu-3.0 gir1.2-cogl-1.0 gir1.2-coglpango-1.0
+  gir1.2-cvc-1.0 gir1.2-gdesktopenums-3.0 gir1.2-ggit-1.0 gir1.2-gkbd-3.0
+  gir1.2-gnomebluetooth-1.0 gir1.2-gnomedesktop-3.0 gir1.2-gtkclutter-1.0
+  gir1.2-gucharmap-2.90 gir1.2-json-1.0 gir1.2-keybinder-3.0 gir1.2-nm-1.0
+  gir1.2-nma-1.0 gir1.2-upowerglib-1.0 gir1.2-xkl-1.0 gir1.2-zeitgeist-2.0
+  gist gkbd-capplet gnome-backgrounds gnome-control-center-data
+  gnome-panel-data gnome-settings-daemon gnome-user-docs iso-flags-png-320x240
+  libcaribou-common libcaribou0 libcinnamon-control-center1
+  libcinnamon-menu-3-0 libcjs0 libcolord-gtk1 libcompfaceg1 libcscreensaver0
+  libcvc0 libetpan20 libgdm1 libgit2-26 libgit2-glib-1.0-0 libgle3
+  libgnome-bluetooth13 libgnome-menu-3-0 libgnomekbd-common libgnomekbd8
+  libgspell-1-1 libgspell-1-common libibus-1.0-5 libjpeg-turbo-progs
+  libkeybinder-3.0-0 liblockfile-bin liblockfile1 libmozjs-38-0
+  libnemo-extension1 libnss-myhostname libpython3-dev libpython3.6-dev
+  libwhoopsie-preferences0 libzeitgeist-2.0-0 mousetweaks nautilus-data
+  nemo-data python-olefile python-pam python-pil python-pyinotify ruby-json
+  ubuntu-docs whoopsie-preferences xscreensaver-data-extra xscreensaver-gl
+  xscreensaver-gl-extra
+Use 'sudo apt autoremove' to remove them.
+0 uppfærðir, 0 nýlega uppsettir, 0 fjarlægðir og 125 ekki uppfærðir.
+INSTALLING NODEJS DONE
+INSTALLING NPM...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+npm is already the newest version (3.5.2-0ubuntu4).
+The following packages were automatically installed and are no longer required:
+  apg cinnamon-control-center-data cinnamon-session-common cjs file-roller
+  gedit-plugins-common gir1.2-accountsservice-1.0 gir1.2-caribou-1.0
+  gir1.2-clutter-1.0 gir1.2-cmenu-3.0 gir1.2-cogl-1.0 gir1.2-coglpango-1.0
+  gir1.2-cvc-1.0 gir1.2-gdesktopenums-3.0 gir1.2-ggit-1.0 gir1.2-gkbd-3.0
+  gir1.2-gnomebluetooth-1.0 gir1.2-gnomedesktop-3.0 gir1.2-gtkclutter-1.0
+  gir1.2-gucharmap-2.90 gir1.2-json-1.0 gir1.2-keybinder-3.0 gir1.2-nm-1.0
+  gir1.2-nma-1.0 gir1.2-upowerglib-1.0 gir1.2-xkl-1.0 gir1.2-zeitgeist-2.0
+  gist gkbd-capplet gnome-backgrounds gnome-control-center-data
+  gnome-panel-data gnome-settings-daemon gnome-user-docs iso-flags-png-320x240
+  libcaribou-common libcaribou0 libcinnamon-control-center1
+  libcinnamon-menu-3-0 libcjs0 libcolord-gtk1 libcompfaceg1 libcscreensaver0
+  libcvc0 libetpan20 libgdm1 libgit2-26 libgit2-glib-1.0-0 libgle3
+  libgnome-bluetooth13 libgnome-menu-3-0 libgnomekbd-common libgnomekbd8
+  libgspell-1-1 libgspell-1-common libibus-1.0-5 libjpeg-turbo-progs
+  libkeybinder-3.0-0 liblockfile-bin liblockfile1 libmozjs-38-0
+  libnemo-extension1 libnss-myhostname libpython3-dev libpython3.6-dev
+  libwhoopsie-preferences0 libzeitgeist-2.0-0 mousetweaks nautilus-data
+  nemo-data python-olefile python-pam python-pil python-pyinotify ruby-json
+  ubuntu-docs whoopsie-preferences xscreensaver-data-extra xscreensaver-gl
+  xscreensaver-gl-extra
+Use 'sudo apt autoremove' to remove them.
+0 uppfærðir, 0 nýlega uppsettir, 0 fjarlægðir og 125 ekki uppfærðir.
+DONE INSTALLING NPM
+VERSION OF ALL TOOLS:
+GIT VERSION:
+git version 2.17.1
+NodeJS version:
+v8.10.0
+NPM VERSION:
+3.5.2

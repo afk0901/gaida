@@ -51,14 +51,6 @@ echo "NPM VERSION:"
 #NPM version
 npm -v 
 }
-#Log the output to a text file
-cd - #Back in the  scripts directory so the log file is in the right place
-#Create a log file
-touch ./log.txt
-#Change permissions so it's possible to write and read the log file
-sudo chmod 777 ./log.txt 
-installNodeJSAndGit | tee -a ./log.txt
-cd .. #Back to the directory above to continue installing 
 
 #Installs Aws and prints the aws version
 installAws()
@@ -86,9 +78,7 @@ unzip terraform_0.12.16_linux_amd64.zip
 ./terraform --version
 echo "DONE INSTALLING TERRAFORM"
 }
-
-#Log the output when installing NodeJS and git
-installNodeJSAndGit | tee -a ./log.txt
+ 
 #Install Docker Engine - Community - latest version
 echo "INSTALLING DOCKER ENGINE..."
 sudo apt-get install docker-ce docker-ce-cli containerd.io
@@ -97,6 +87,14 @@ echo "DOCKER INFORMATION:"
 docker version
 #Installs Terraform
 install_TerraForm
+#Log the output to a text file (When installing NodeJS and Git
+cd - #Back in the  scripts directory so the log file is in the right place
+#Create a log file
+touch ./log.txt
+#Change permissions so it's possible to write and read the log file
+sudo chmod 777 ./log.txt 
+installNodeJSAndGit | tee -a ./log.txt
+
 echo "SCRIPT ENDED AT:" 
 #Script ended at this date with seconds
 date +"%c" 
