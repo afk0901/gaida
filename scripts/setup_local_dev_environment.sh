@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #This script installs Git, NodeJS and Aws
+#the OS used is Linux (debian) with Ubuntu Mate
 
 #Date when the script started with seconds
 NOW=`date +"%c"`
@@ -23,7 +24,7 @@ echo Welcome $USER
 echo "This script prints out the type of the operating system, git and NodeJS and prints the version of each one"
 #current OS
 OS=`uname -a`
-echo "Running on $OS"
+echo "Running on: $OS"
 echo "INSTALLING GIT:"
 #Installs git
 sudo apt-get install git
@@ -53,15 +54,14 @@ echo "NPM VERSION:"
 #NPM version
 npm -v 
 }
-#Log the output
+#Log the output to a text file
 installNodeJSAndGit | tee -a ./log.txt
 
 #Installs Aws and prints the aws version
 installAws()
 {
-#Install awscli
-#echo "INSTALLING awscli..."
-#Installs awscli and its dependencies
+#Install awscli and its dependencies
+echo "INSTALLING awscli..."
 sudo apt install awscli
 echo "DONE INSTALLING awscli"
 echo "AWS VERSION:"
@@ -70,10 +70,8 @@ aws --version
 
 #Log the output when installing NodeJS and git
 installNodeJSAndGit | tee -a ./log.txt
-#Installs Aws and prints its version
-installAws
-echo "INATALLING DOCKER ENGINE..."
 #Install Docker Engine - Community - latest version
+echo "INATALLING DOCKER ENGINE..."
 sudo apt-get install docker-ce docker-ce-cli containerd.io
 echo "DONE INSTALLING DOCKER ENGINE"
 echo "DOCKER INFORMATION:"
