@@ -13,10 +13,6 @@ sudo apt-get update
 #Prints out the current username, installs git and node JS, prints out the OS,
 #git version NodeJS version and npm version 
 installNodeJSAndGit () {
-#Create a log file
-touch ./log.txt
-#Change permissions so it's possible to write and read the log file
-sudo chmod 777 ./log.txt 
 echo "SCRIPT STARTED AT:"
 #Current date
 echo $NOW
@@ -56,7 +52,13 @@ echo "NPM VERSION:"
 npm -v 
 }
 #Log the output to a text file
+cd - #Back in the  scripts directory so the log file is in the right place
+#Create a log file
+touch ./log.txt
+#Change permissions so it's possible to write and read the log file
+sudo chmod 777 ./log.txt 
 installNodeJSAndGit | tee -a ./log.txt
+cd .. #Back to the directory above to continue installing 
 
 #Installs Aws and prints the aws version
 installAws()
