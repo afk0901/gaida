@@ -1,1 +1,1 @@
-# HagnytGaidaStjornunOgProfanir
+# Hagnýt gæðastjórnun og prófanir
