@@ -30,8 +30,9 @@ installNodeDependencies() {
     #Go to the app
     cd ../item_repository
     #Install express
-    npm install express
-  
+    sudo npm install express
+    #Install dependencies defined in package.json
+    sudo npm install  
     echo -e "\e[92mDONE INSTALL NODE DEPENDENCIES"
     #Go back
     cd -
@@ -65,6 +66,9 @@ installDocker()
     echo -e "\e[92mDONE INSTALLING DOCKER COMPOSE"
     #Changing color back to default
     echo -e "\e[39m"
+    #Adds the user to the docker group so it's possible to use docker without sudo
+    sudo usermod -a -G docker $USER
+
 }
 
 #Downloads Terraform and exctracts it 
@@ -77,9 +81,9 @@ install_TerraForm() {
     #So it's possible to unzip the Terraform zip file
     sudo apt-get -y install unzip 
     #Download Terraform
-    wget https://releases.hashicorp.com/terraform/0.12.16/terraform_0.12.16_linux_amd64.zip
+    sudo wget https://releases.hashicorp.com/terraform/0.12.16/terraform_0.12.16_linux_amd64.zip
     #Unzip Terraform
-    unzip terraform_0.12.16_linux_amd64.zip
+    sudo unzip terraform_0.12.16_linux_amd64.zip
     echo -e "\e[92mDONE INSTALLING TERRAFORM"
     #Changing color back to default
     echo -e "\e[39m"
@@ -133,10 +137,10 @@ createLog() {
 
 #Creates line breaks for seperation
 createLineBreaks() {
-    printf "\n" | tee -a ./log.txt
-    printf "\n" | tee -a ./log.txt
-    printf "\n" | tee -a ./log.txt
-    printf "\n" | tee -a ./log.txt
+    printf "\n"
+    printf "\n"
+    printf "\n"
+    printf "\n"
 }
 
 main () {

@@ -3,7 +3,7 @@
 *.tfstate.backup
 ./terraform
 ./terraform*
-*log.txt
+*/*log.txt
 *.zip*
 *terraform
 node_modules/
