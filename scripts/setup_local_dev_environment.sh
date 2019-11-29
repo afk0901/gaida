@@ -74,6 +74,7 @@ installDocker()
 #Downloads Terraform and exctracts it 
 #(Credit: https://askubuntu.com/questions/983351/how-to-install-terraform-in-ubuntu)
 install_TerraForm() {
+    
     echo -e "\e[92mINSTALLING TERRAFORM..."
     #Changing color back to default
     echo -e "\e[39m"
@@ -87,6 +88,8 @@ install_TerraForm() {
     echo -e "\e[92mDONE INSTALLING TERRAFORM"
     #Changing color back to default
     echo -e "\e[39m"
+    #Remove the ZIP file after
+    rm -f ./terraform_0.12.16_linux_amd64.zip
 }
 
 printVersions() {
