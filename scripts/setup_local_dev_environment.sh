@@ -176,8 +176,6 @@ sudo apt-get update
 #For seperation of the text
 createLineBreaks
 
-cd .. #So everything is installed in the correct directory
-
 #Install AWS
 installAws
 #For seperation of the text
@@ -189,7 +187,6 @@ createLineBreaks
 #Installs Terraform
 install_TerraForm
 
-cd - #Back in the  scripts directory so the log file is created in the right place
 #Creates a log
 createLog
 #install Git
