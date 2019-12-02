@@ -7,3 +7,4 @@ scripts/log.txt
 *.zip*
 *terraform
 node_modules/
+./scripts/dockerpass.txt
