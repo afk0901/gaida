@@ -4,12 +4,16 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:unit": "jest --testRegex $*.unit-test.js --collectCoverage true"
   },
   "author": "Arnar Freyr Kristinsson",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
     "pg": "^7.12.1"
+  },
+  "devDependencies": {
+    "jest": "^24.9.0"
   }
 }
