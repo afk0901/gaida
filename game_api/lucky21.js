@@ -11,18 +11,27 @@ module.exports = (deck, dealer) => {
         ],
         // The card that the player thinks will exceed 21.
         card: undefined,
-        playerCardsNumbers: []
+        playerCardsNumbers: [],
+        total: 0
     };
     return {
         state: state,
         // Is the game over (true or false).
         isGameOver: (game) => {
             // TODO
+            if(game.state.total > 21)
+            {
+                return true;
+            }
             return false;
         },
         // Has the player won (true or false).
         playerWon: (game) => {
             // TODO
+            if(game.state.total == 21){
+                return true;
+            }
+            return false;
         },
         // The highest score the cards can yield without going over 21 (integer).
         getCardsValue: (game) => {
@@ -40,13 +49,13 @@ module.exports = (deck, dealer) => {
             
             var firstCardNumber = Number(firstConvertedToNumber);
             var secondCardNumber = Number(secondConvertedToNumber);
-
+            
             game.state.playerCardsNumbers.push(firstCardNumber);
             game.state.playerCardsNumbers.push(secondCardNumber);
         },
 
         getTotal: (game) => {
-            return  game.state.playerCardsNumbers[0] + game.state.playerCardsNumbers[1];
+            game.state.total = game.state.playerCardsNumbers[0] + game.state.playerCardsNumbers[1];
         },
         // The player's cards (array of strings).
         getCards: (game) => {
@@ -63,8 +72,6 @@ module.exports = (deck, dealer) => {
         },
         // Player action (void).
         guessOver21: (game) => {
-            // TODO
-            
         },
     };
 };
