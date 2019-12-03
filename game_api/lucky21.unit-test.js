@@ -70,53 +70,67 @@ describe('Game API', () => {
     });
 
     describe('The function guess21OrUnder should draw the next card', () => {
-      
-        
-        describe('The function getTotal should return 21 if there is a winner', () => {
-          
-          test('The function getTotal should return 21 if there is a winner', () => {
-            game = lucky21Constructor(deck, dealer);
-            game.state.playerCardsNumbers[0] = 10;
-            game.state.playerCardsNumbers[1] = 11;
-            game.getTotal(game);
-            expect(game.state.total).toEqual(21);
-          });
-        });
-        
-        describe('The function playerWon should return true if the card total is equal to 21', () => {
-          game.getTotal(game);
-            test('The function playerWon should be true', () => {
-            expect(game.playerWon(game)).toEqual(true);
-          });
-          });
-         
-        });
 
-        describe('The function playerWon should return false if the card total is NOT equal to 21', () => {
-          
-          test('The total should NOT be equal to 21', () => {
+
+      describe('The function playerWon should return false if the card total is NOT equal to 21 but true if it is equal to 21', () => {
+
+        test('The total should NOT be equal to 21, because the player has not won the game', () => {
           game = lucky21Constructor(deck, dealer);
           game.state.playerCardsNumbers[0] = 10;
           game.state.playerCardsNumbers[1] = 8;
-            expect(game.state.total).not.toEqual(21);
-          });
-          test('The function playerWon should return false', () => {
-            expect(game.playerWon(game)).toBeFalsy();
+          expect(game.state.total).not.toEqual(21);
+        });
+
+        test('The function playerWon should return false, because the player has NOT won the game', () => {
+          expect(game.playerWon(game)).toBeFalsy();
+        });
+
+        test('The function getTotal should return 21 because there is a winner', () => {
+          game = lucky21Constructor(deck, dealer);
+          game.state.playerCardsNumbers[0] = 10;
+          game.state.playerCardsNumbers[1] = 11;
+          game.getTotal(game);
+          expect(game.state.total).toEqual(21);
+        });
+
+        test('The function playerWon should return true, because the player has won the game', () => {
+          expect(game.playerWon(game)).toBeTruthy();
+        });
+
+      });
+
+      describe('The isGameOverFunction should return true ONLY if the card total is above 21', () => {
+        var game = lucky21Constructor(deck, dealer);
+        game.state.playerCardsNumbers[0] = 10;
+        game.state.playerCardsNumbers[1] = 12;
+        game.getTotal(game);
+
+        test('Total should be higher than 21', () => {
+          expect(game.state.total).toBeGreaterThan(21);
+        });
+
+        test('The function playerWon should be falsy, because total should be higher than 21', () => {
+          expect(game.playerWon(game)).toBeFalsy();
+        });
+        test('The function isGameOver should be truthy, because total should be higher than 21', () => {
+          expect(game.isGameOver(game)).toBeTruthy();
+        });
+
+        describe("isGameOver should return false if number is less than 21", () => {
+          var game = lucky21Constructor(deck, dealer);
+          game.state.playerCardsNumbers[0] = 10;
+          game.state.playerCardsNumbers[1] = 9;
+          game.getTotal(game);
+          test('Total should be lower than 21', () => {
+
+            expect(game.state.total).toBeLessThan(21);
           });
 
-        describe('The isGameOverFunction should return true if the card total is above 21 ', () => {
-            var game = lucky21Constructor(deck, dealer);
-            game.state.playerCardsNumbers[0] = 10;
-            game.state.playerCardsNumbers[1] = 12;
-            game.getTotal(game);
-           test('The function playerWon should be falsy', () => {
-              expect(game.playerWon(game)).toBeFalsy();
-            });
-            test('The function isGameOver should be truthy', () => {
-              expect(game.isGameOver(game)).toBeTruthy();
-            });
+          test('The function isGameOver should be falsy, because total should be lower than 21', () => {
+            expect(game.isGameOver(game)).toBeFalsy();
           });
-
         });
       });
     });
+  });
+});
