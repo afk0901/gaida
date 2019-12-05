@@ -1,3 +1,6 @@
+const deckConstructor = require('./deck.js');
+const dealerConstructor = require('./dealer.js');
+
 module.exports = (deck, dealer) => {
     dealer.shuffle(deck);
     let card0 = dealer.draw(deck);
@@ -9,7 +12,7 @@ module.exports = (deck, dealer) => {
             card0,
             card1,
         ],
-        // The card that the player thinks will exceed 21.
+        // The card that the player thinks will exceed 21 - always undefined when less than 21
         card: undefined,
         playerCardsNumbers: [],
         total: 0
@@ -18,9 +21,9 @@ module.exports = (deck, dealer) => {
         state: state,
         // Is the game over (true or false).
         isGameOver: (game) => {
-            // TODO
-            if(game.state.total > 21)
-            {
+            
+           // game.getTotal(game);
+            if ( game.state.total > 21) {
                 return true;
             }
             return false;
@@ -28,7 +31,7 @@ module.exports = (deck, dealer) => {
         // Has the player won (true or false).
         playerWon: (game) => {
             // TODO
-            if(game.state.total == 21){
+            if (state.total == 21) {
                 return true;
             }
             return false;
@@ -42,20 +45,22 @@ module.exports = (deck, dealer) => {
             // TODO
         },
         //converting the player cards to numbers
-        convertCard: (game) => {
-            // TODO
-            var firstConvertedToNumber = game.state.cards[0].slice(0, -1);
-            var secondConvertedToNumber = game.state.cards[1].slice(0, -1);
-            
-            var firstCardNumber = Number(firstConvertedToNumber);
-            var secondCardNumber = Number(secondConvertedToNumber);
-            
-            game.state.playerCardsNumbers.push(firstCardNumber);
-            game.state.playerCardsNumbers.push(secondCardNumber);
+        convertCards: (game) => {
+
+            console.log(game.state.deck);
+            for (var i = 0; i < game.state.cards.length; i++) {
+
+                var convertedCard = game.state.cards[i].slice(0, -1);
+                state.playerCardsNumbers.push(parseInt(convertedCard, 10));
+            }
+            return game.state.playerCardsNumbers;
         },
 
         getTotal: (game) => {
-            game.state.total = game.state.playerCardsNumbers[0] + game.state.playerCardsNumbers[1];
+
+            const sum = (card1, card2) => card1 + card2;
+            game.state.total = game.state.playerCardsNumbers.reduce(sum);
+            console.log(game.state.total);
         },
         // The player's cards (array of strings).
         getCards: (game) => {
@@ -67,8 +72,33 @@ module.exports = (deck, dealer) => {
         },
         // Player action (void).
         guess21OrUnder: (game) => {
-            // TODO
-            game.state.card = "05C";
+            var gameOn = true;
+            let deck = deckConstructor();
+            let dealer = dealerConstructor();
+            
+            game.state.deck = deck;
+            game.state.dealer = dealer;
+            game.getTotal(game);
+            
+          while (gameOn == true) { 
+                console.log(game.state.total);
+
+              if (game.isGameOver(game)) {
+                    console.log(game.state.total);
+                    console.log("GAMOVER TRUE");
+                    gameOn = true;
+                }
+               if (game.playerWon(game)) {
+                    gameOn = true;
+                }
+                //Continue the game
+                else {
+                    game.state.cards.push(dealer.draw(deck));
+                    game.getTotal(game);
+                    console.log(game.state.total);
+                    gameOn = false;
+                }
+                }
         },
         // Player action (void).
         guessOver21: (game) => {
