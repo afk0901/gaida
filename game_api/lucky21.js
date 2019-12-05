@@ -12,7 +12,7 @@ module.exports = (deck, dealer) => {
             card0,
             card1,
         ],
-        // The card that the player thinks will exceed 21 - always undefined when less than 21
+        // The card that the player thinks will exceed 21
         card: undefined,
         playerCardsNumbers: [],
         total: 0
@@ -21,17 +21,19 @@ module.exports = (deck, dealer) => {
         state: state,
         // Is the game over (true or false).
         isGameOver: (game) => {
-            
-           // game.getTotal(game);
-            if ( game.state.total > 21) {
+
+            // game.getTotal(game);
+            console.log(game.state.total);
+            console.log(game.state.card);
+            if ((game.state.total > 21 && game.state.card == undefined) || (game.state.total < 21 && game.state.card != undefined)) {
                 return true;
             }
+
             return false;
         },
         // Has the player won (true or false).
         playerWon: (game) => {
-            // TODO
-            if (state.total == 21) {
+            if ((state.total == 21 && game.state.card == undefined) || (game.state.total > 21 && game.state.card != undefined)) {
                 return true;
             }
             return false;
@@ -42,8 +44,16 @@ module.exports = (deck, dealer) => {
         },
         // The value of the card that should exceed 21 if it exists (integer or undefined).
         getCardValue: (game) => {
-            // TODO
+
+            if (game.state.card != undefined) {
+                return game.convertCard(game.state.card);
+            }
         },
+
+        convertCard: (card) => {
+            return Number(card.slice(0, -1));
+        },
+
         //converting the player cards to numbers
         convertCards: (game) => {
 
@@ -64,43 +74,43 @@ module.exports = (deck, dealer) => {
         },
         // The player's cards (array of strings).
         getCards: (game) => {
-            // TODO
+            return game.state.cards;
         },
         // The player's card (string or undefined).
         getCard: (game) => {
-            // TODO
+            return game.state.card;
         },
         // Player action (void).
         guess21OrUnder: (game) => {
-            var gameOn = true;
+
             let deck = deckConstructor();
             let dealer = dealerConstructor();
-            
             game.state.deck = deck;
             game.state.dealer = dealer;
             game.convertCards(game);
             game.getTotal(game);
-            
-          while (gameOn == true) { 
-                console.log(game.state.total);
 
-              if (game.isGameOver(game)) {
-                    gameOn = false;
-                }
-               if (game.playerWon(game)) {
-                    gameOn = false;
-                }
-                //Continue the game
-                else {
-                    game.state.cards.push(dealer.draw(deck));
-                    game.getTotal(game);
-                    console.log(game.state.total);
-                    gameOn = false;
-                }
-                }
+            //Continue the game if no win or no loose
+            if (game.playerWon(game) == false && game.isGameOver(game) == false) {
+                game.state.cards.push(dealer.draw(deck));
+                console.log(game.state.total);
+            }
         },
         // Player action (void).
         guessOver21: (game) => {
+            let deck = deckConstructor();
+            let dealer = dealerConstructor();
+            game.state.total = 0;
+
+            game.state.deck = deck;
+            game.state.dealer = dealer;
+            game.convertCards(game);
+            game.getTotal(game);
+            game.state.cards.push(dealer.draw(deck));
+            game.state.card = dealer.draw(deck);
+
+            game.isGameOver(game);
+            game.playerWon(game);
         },
     };
 };
