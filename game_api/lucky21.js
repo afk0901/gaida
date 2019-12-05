@@ -78,18 +78,17 @@ module.exports = (deck, dealer) => {
             
             game.state.deck = deck;
             game.state.dealer = dealer;
+            game.convertCards(game);
             game.getTotal(game);
             
           while (gameOn == true) { 
                 console.log(game.state.total);
 
               if (game.isGameOver(game)) {
-                    console.log(game.state.total);
-                    console.log("GAMOVER TRUE");
-                    gameOn = true;
+                    gameOn = false;
                 }
                if (game.playerWon(game)) {
-                    gameOn = true;
+                    gameOn = false;
                 }
                 //Continue the game
                 else {
