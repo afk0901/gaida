@@ -76,11 +76,6 @@ module.exports = (deck, dealer) => {
                 if (game.state.playerCardsNumbers[i] == 11 || game.state.playerCardsNumbers[i] == 12 || game.state.playerCardsNumbers[i] == 13) {
                     game.state.playerCardsNumbers[i] = 10;
                 }
-
-                //Ace when higher than 21 is selected
-                if (game.state.playerCardsNumbers[i] == 1) {
-                    game.state.playerCardsNumbers[i] = 11;
-                }
             }
             const sum = (card1, card2) => card1 + card2;
             game.state.total = game.state.playerCardsNumbers.reduce(sum);
@@ -99,18 +94,43 @@ module.exports = (deck, dealer) => {
             return value === 1;
         },
 
-        benefitAces: (game) => {
+        //Benifits the aces for the user
+        benefitAces21OrUnder: (game) => {
+            game.state.playerCardsNumbers = [];
             game.convertCards(game);
-            let aces = game.state.playerCardsNumbers.filter(game.OnlyAces);
-
-            aces[aces.length - 1] = 11;
             game.getTotal(game);
+            //Let's see if total is > 21 if one ace is 11
+            game.state.total += 11;
 
-            if (game.state.total > 21) {
-                aces[aces.length - 1] = 1;
-                return aces;
+            //Switching out one ace if total is < 21 if one ace should be 11
+            if (game.state.total < 21) {
+                for (var i = 0; i < game.state.playerCardsNumbers.length; i++) {
+                    if (game.state.playerCardsNumbers[i] == 1) {
+                        game.state.playerCardsNumbers[i] = 11;
+                        break;
+                    }
+                }
             }
-            return aces;
+            else {
+                game.state.total -= 11;
+                console.log(game.state.playerCardsNumbers);
+            }
+            console.log(game.state.playerCardsNumbers);
+
+        },
+
+        benefitAces21OrOver: (game) => {
+            game.state.playerCardsNumbers = [];
+            game.convertCards(game);
+            console.log(game.state.playerCardsNumbers);
+            //Set all aces to 11
+            for (var i = 0; i < game.state.playerCardsNumbers.length; i++) {
+                if (game.state.playerCardsNumbers[i] == 1) {
+                    game.state.playerCardsNumbers[i] = 11;
+                }
+            }
+            game.state.playerCardsNumbers.pop();//Somehow 13 get added to the array - workaround
+            console.log(game.state.playerCardsNumbers);
         },
 
         // Player action (void).
@@ -122,6 +142,8 @@ module.exports = (deck, dealer) => {
             game.state.dealer = dealer;
             game.convertCards(game);
             game.getTotal(game);
+            game.benefitAces21OrUnder(game);
+
 
             //Continue the game if no win or no loose
             if (game.playerWon(game) == false && game.isGameOver(game) == false) {
@@ -140,9 +162,13 @@ module.exports = (deck, dealer) => {
             game.getTotal(game);
             game.state.cards.push(dealer.draw(deck));
             game.state.card = dealer.draw(deck);
+            console.log(game.state.playerCardsNumbers);
+
+            game.benefitAces21OrOver(game);
 
             game.isGameOver(game);
             game.playerWon(game);
+
         },
     };
 };

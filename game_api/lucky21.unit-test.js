@@ -72,15 +72,17 @@ describe('Game API', () => {
   });
 
   describe('The function guessOver21 should draw the final card', () => {
-    // Act
-    let gameOver21CheckAce = lucky21Constructor(deck, dealer);
-    gameOver21CheckAce.state.playerCardsNumbers = [1, 1, 10];
 
-    //The Ace should always be 11
-    test('The Ace should be the most beneficial to the user (over 21 selected) ,', () => {
-      gameOver21CheckAce.getTotal(gameOver21CheckAce);
+    let gameOver21CheckAces = lucky21Constructor(deck, dealer);
+    gameOver21CheckAces.state.cards = ['10S', '1S', '1D', '1D'];
+    gameOver21CheckAces.guessOver21(gameOver21CheckAces);
 
-      expect(gameOver21CheckAce.state.total).toEqual(32);
+    test('card should be defined', () => {
+      expect(gameOver21CheckAces.state.card).toBeDefined();
+    });
+
+    test('aces should be only be 11 in game.state.playerCardsNumbers', () => {
+      expect(gameOver21CheckAces.state.playerCardsNumbers).toEqual([10,11,11,11]);
     });
 
     let gameOver21 = lucky21Constructor(deck, dealer);
@@ -152,19 +154,35 @@ describe('Game API', () => {
 
     // Act
     let gameUnder21CheckAces = lucky21Constructor(deck, dealer);
-    gameUnder21CheckAces.state.cards = ['1D', '1S', '8S', '1S'];
+    gameUnder21CheckAces.state.cards = ['7S', '1S', '1D'];
+    gameUnder21CheckAces.benefitAces21OrUnder(gameUnder21CheckAces);
+    gameUnder21CheckAces.guess21OrUnder(gameUnder21CheckAces);
 
-    describe('An Ace is worth 1 or 11 points depending on which is most beneficial to the player', () => {
+    test('card sohuld be undefined', () => {
+      expect(gameUnder21CheckAces.state.card).not.toBeDefined();
+    });
 
-      test('Total is 11 should NOT change the aces', () => {
-        expect(gameUnder21CheckAces.benefitAces(gameUnder21CheckAces)).toEqual([1,1,1]);
+    describe('An Ace is worth 1 or 11 points depending on which is most beneficial to the player (under21Selected)', () => {
+
+      test('One ace should change to 11 if total + 11 is less than 21', () => {
+        expect(gameUnder21CheckAces.state.total).toEqual(20);
+      });
+     
+      test('game.state.playerCardsNumbers should contain 11 and only one 11', () => {
+        expect(gameUnder21CheckAces.state.playerCardsNumbers).toEqual([7,11,1]);
       });
 
-      let gameUnder21CheckAcesTotalBelow = lucky21Constructor(deck, dealer);
-      gameUnder21CheckAcesTotalBelow.state.cards = ['1S','2D','3S','4D'];
-      /*test('Total is 10 should be one 11 to get to 21', () => {
-        expect(gameUnder21CheckAcesTotalBelow.benefitAces(gameUnder21CheckAcesTotalBelow)).toEqual([1,1,11]);
-      });*/
+     let gameUnder21CheckAcesOver21 = lucky21Constructor(deck, dealer);
+      gameUnder21CheckAcesOver21.state.cards = ['10S', '1S','10S','10D', '1D'];
+      gameUnder21CheckAcesOver21.benefitAces21OrUnder(gameUnder21CheckAcesOver21);
+
+      test('Total should stay the same if total + 11 is greater than 21', () => {
+        expect(gameUnder21CheckAcesOver21.state.total).toEqual(32);
+      });
+
+      test('game.state.playerCardsNumbers should not contain 11 if total 11 is greater than 21', () => {
+        expect(gameUnder21CheckAcesOver21.state.playerCardsNumbers).toEqual([10, 1, 10, 10, 1]);
+      });
     });
 
     test('getCardValue should return the card', () => {
@@ -182,7 +200,7 @@ describe('Game API', () => {
       gameContinue.guess21OrUnder(gameContinue);
 
       //Tests for continue
-      test('guess21OrUnder should add a new card in game.staexpect.arrayContaining(expected),te.cards', () => {
+      test('guess21OrUnder should add a new card in game', () => {
         expect(gameContinue.state.cards.length).toBeGreaterThan(oldLength);
       });
 
