@@ -13,3 +13,4 @@ node {
                  git stash
                  }
     }
+step([$class: 'clean'])
