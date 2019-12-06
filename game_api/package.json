@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "test:unit": "jest --testRegex $*.unit-test.js --collectCoverage true --watch"
+    "test:unit": "jest --testRegex $*.unit-test.js --collectCoverage true --watch",
+    "eslint": "npx eslint *.js"
   },
   "author": "Arnar Freyr Kristinsson",
   "license": "ISC",
@@ -14,6 +15,9 @@
     "pg": "^7.12.1"
   },
   "devDependencies": {
+    "eslint": "^6.7.2",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-react": "^7.17.0",
     "jest": "^24.9.0"
   }
 }
