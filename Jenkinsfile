@@ -8,7 +8,7 @@ node {
     }
 }
 
-node('build_server')
+   node
         {
             stage('WS clean')
             {
