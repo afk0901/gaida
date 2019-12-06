@@ -22,9 +22,6 @@ module.exports = (deck, dealer) => {
         // Is the game over (true or false).
         isGameOver: (game) => {
 
-            // game.getTotal(game);
-            console.log(game.state.total);
-            console.log(game.state.card);
             if ((game.state.total > 21 && game.state.card == undefined) || (game.state.total < 21 && game.state.card != undefined)) {
                 return true;
             }
@@ -40,7 +37,15 @@ module.exports = (deck, dealer) => {
         },
         // The highest score the cards can yield without going over 21 (integer).
         getCardsValue: (game) => {
-            // TODO
+            let cards = game.state.cards;
+            let sum = 0;
+
+            for (var i = 0; i < cards.length; i++) {
+                if (sum <= 21) {
+                    sum += game.convertCard(cards[i]);
+                }
+            }
+            return sum;
         },
         // The value of the card that should exceed 21 if it exists (integer or undefined).
         getCardValue: (game) => {
@@ -57,7 +62,6 @@ module.exports = (deck, dealer) => {
         //converting the player cards to numbers
         convertCards: (game) => {
 
-            console.log(game.state.deck);
             for (var i = 0; i < game.state.cards.length; i++) {
 
                 var convertedCard = game.state.cards[i].slice(0, -1);
@@ -68,9 +72,18 @@ module.exports = (deck, dealer) => {
 
         getTotal: (game) => {
 
+            for (var i = 0; i < game.state.playerCardsNumbers.length; i++) {
+                if (game.state.playerCardsNumbers[i] == 11 || game.state.playerCardsNumbers[i] == 12 || game.state.playerCardsNumbers[i] == 13) {
+                    game.state.playerCardsNumbers[i] = 10;
+                }
+
+                //Ace when higher than 21 is selected
+                if (game.state.playerCardsNumbers[i] == 1) {
+                    game.state.playerCardsNumbers[i] = 11;
+                }
+            }
             const sum = (card1, card2) => card1 + card2;
             game.state.total = game.state.playerCardsNumbers.reduce(sum);
-            console.log(game.state.total);
         },
         // The player's cards (array of strings).
         getCards: (game) => {
@@ -80,6 +93,26 @@ module.exports = (deck, dealer) => {
         getCard: (game) => {
             return game.state.card;
         },
+
+        //Should return only ones
+        OnlyAces: (value) => {
+            return value === 1;
+        },
+
+        benefitAces: (game) => {
+            game.convertCards(game);
+            let aces = game.state.playerCardsNumbers.filter(game.OnlyAces);
+
+            aces[aces.length - 1] = 11;
+            game.getTotal(game);
+
+            if (game.state.total > 21) {
+                aces[aces.length - 1] = 1;
+                return aces;
+            }
+            return aces;
+        },
+
         // Player action (void).
         guess21OrUnder: (game) => {
 
@@ -93,7 +126,6 @@ module.exports = (deck, dealer) => {
             //Continue the game if no win or no loose
             if (game.playerWon(game) == false && game.isGameOver(game) == false) {
                 game.state.cards.push(dealer.draw(deck));
-                console.log(game.state.total);
             }
         },
         // Player action (void).
