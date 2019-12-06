@@ -6,14 +6,11 @@ node {
         sh "./scripts/docker_push.sh ${git.GIT_COMMIT}"
         sh "echo LUNDIogfanta199 > ./dockerpass.txt" 
     }
-}
 
-   node
+        step([$class: 'clean'])
         {
-            stage('WS clean')
-            {
-                 echo 'I solemnly swear that I know not to run this without committing changes I want to keep!'
-                 git clean -dfxq
+            echo 'I solemnly swear that I know not to run this without committing changes I want to keep!'
+            git clean -dfxq
                  git stash
             }
         }
