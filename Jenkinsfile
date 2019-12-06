@@ -7,10 +7,10 @@ node {
         sh "echo LUNDIogfanta199 > ./dockerpass.txt" 
     }
 
-    clean {
+  
+
+    stage("Clean") {
         echo 'I solemnly swear that I know not to run this without committing changes I want to keep!'
-            git clean -dfxq
-                 git stash
-                 }
+        git clean -dfxq
+        git stash
     }
-step([$class: 'clean'])
