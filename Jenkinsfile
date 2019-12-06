@@ -7,6 +7,7 @@ node {
         sh "echo LUNDIogfanta199 > ./dockerpass.txt" 
     }
 
+
   
 
     stage("Clean") {
@@ -14,3 +15,5 @@ node {
         git clean -dfxq
         git stash
     }
+
+}
