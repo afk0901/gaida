@@ -10,15 +10,17 @@ node {
 
     def git = checkout scm
     stage("Build") {
+
+
         environment { 
                 NODE_ENV = 'production'
             }
-        steps {
-        sh 'echo NODEJS "${env.NODE_ENV}"'
-        sh "./scripts/docker_build.sh ${git.GIT_COMMIT}"
-        sh "docker login --username afk0901 --password LUNDIogfanta199"
-        sh "./scripts/docker_push.sh ${git.GIT_COMMIT}"
-        }
+            steps {
+                sh 'echo NODEJS "${env.NODE_ENV}"'
+                sh "./scripts/docker_build.sh ${git.GIT_COMMIT}"
+                sh "docker login --username afk0901 --password LUNDIogfanta199"
+                sh "./scripts/docker_push.sh ${git.GIT_COMMIT}"
+            }
     }
 
     stage("Deploy") {
