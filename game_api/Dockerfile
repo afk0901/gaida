@@ -5,7 +5,9 @@ FROM node:erbium
 WORKDIR /code
 
 #Copy package.json to the container
-COPY package.json package.json
+COPY package.json package.json 
+
+COPY ./ /code
 
 ENV NODE_ENV = development
 
