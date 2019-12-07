@@ -7,6 +7,8 @@ WORKDIR /code
 #Copy package.json to the container
 COPY package.json package.json
 
+ENV NODE_ENV production
+
 #Install dependencies
 RUN npm install
 
