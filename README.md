@@ -14,4 +14,3 @@ Testin sem átti að gera á degi 7 tóku allt of langann tíma hjá mér og gen
 þannig að ég eyddi öllum dögunum í þau og varð þar af leiðandi tveim dögum eftir á.
 Þau kláruðust klukkan 16 í gær og þá átti ég eftir bæði verkefnin, þess vegna skilast þetta
 núna, en ekki í gær. Þar að auki er ég einn í hóp. 
-
