@@ -10,13 +10,13 @@ COPY package.json package.json
 ENV NODE_ENV = development
 
 #Install dependencies depending on the environment and run development things
-RUN if [ "$NODE_ENV" = "production" ]; \
-	then npm install;  \
-         npm install eslint --save-dev \
-         npm run eslint \
+#RUN if [ "$NODE_ENV" = "production" ]; \
+#	then npm install;  \
+        Run npm install eslint --save-dev; \
+         npm run eslint
 
-	else npm install --production; \
-	fi
+#	else npm install --production; \
+#	fi
 
 #Copy database.js to the database.js on the container
 COPY database.js database.js
