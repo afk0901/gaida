@@ -8,7 +8,7 @@ password: 12345
 
 Note - You may have to cd into the scripts directory to run the scripts
 
-Sein skil -
+Sein skil
 
 Testin sem átti að gera á degi 7 tóku allt of langann tíma hjá mér og gengu ekkert voðalega vel
 þannig að ég eyddi öllum dögunum í þau og varð þar af leiðandi tveim dögum eftir á.
