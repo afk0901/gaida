@@ -15,7 +15,7 @@ ENV NODE_ENV = production
 RUN if [ "$NODE_ENV" = "production" ]; \
 	then npm install;  \
         Run npm install eslint --save-dev; \
-         npm run eslint
+         npm run eslint; \
 
 	else npm install --production; \
 	fi
