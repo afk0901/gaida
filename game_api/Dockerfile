@@ -10,7 +10,7 @@ COPY package.json package.json
 COPY ./ /code
 
 #Install dependencies depending on the environment and run development things
-ENV NODE_ENV = production;
+ENV NODE_ENV = development;
 
 RUN npm install; 
 Run npm install eslint --save-dev;
