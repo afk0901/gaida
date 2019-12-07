@@ -8,6 +8,10 @@ node {
         sh 'git stash'
     }
 
+    environment { 
+        NODE_ENV = 'sdfsdfasfsd'
+    }
+
     def git = checkout scm
     stage("Build") {
         sh 'set NODE_ENV=productin'
