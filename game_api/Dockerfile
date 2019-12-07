@@ -12,10 +12,9 @@ COPY ./ /code
 #Install dependencies depending on the environment and run development things
 ENV NODE_ENV = production;
 
-RUN if [ "$NODE_ENV" = "production" ]; \
-	then npm install;  \
-        Run npm install eslint --save-dev; \
-         npm run eslint; \
+RUN npm install; 
+Run npm install eslint --save-dev;
+RUN npm run eslint;
 
 	else npm install --production; \
 	fi
