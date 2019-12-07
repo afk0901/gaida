@@ -10,7 +10,7 @@ node {
 
 
     def git = checkout scm
-    def NV = set NODE_ENV = production;
+    def NV = set NODE_ENV = 'production';
     stage("Build") {
         sh "echo ${NV}"
         sh "./scripts/docker_build.sh ${git.GIT_COMMIT}"
