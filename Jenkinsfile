@@ -6,7 +6,7 @@ node {
    environment {
        color = "blue"
    }
-
+stages {
     stage('Clean')
     {
         sh 'echo I solemnly swear that I know not to run this without committing changes I want to keep!'
@@ -26,4 +26,6 @@ node {
     stage("Deploy") {
         sh "./scripts/jenkins_deploy.sh"
     }
+}
+
 }
