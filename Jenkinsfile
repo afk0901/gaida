@@ -6,5 +6,4 @@ node {
         sh "./scripts/docker_push.sh ${git.GIT_COMMIT}"
         sh "echo LUNDIogfanta199 > ./dockerpass.txt" 
     }
-    step([$class: 'WsCleanup'])
 }
