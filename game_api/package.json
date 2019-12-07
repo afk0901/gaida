@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "test:unit": "jest --testRegex $*.unit-test.js --collectCoverage true --watch",
-    "eslint": "npx eslint *.js"
+    "eslint": "node ./node_modules/eslint/bin/eslint.js *.js"
   },
   "author": "Arnar Freyr Kristinsson",
   "license": "ISC",
