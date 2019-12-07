@@ -14,12 +14,4 @@ node {
         sh "docker login --username afk0901 --password LUNDIogfanta199"
         sh "./scripts/docker_push.sh ${git.GIT_COMMIT}"
     }
-
-    stage("Lint") {
-        dir("./game_api") {
-            sh "npm install"
-            sh "npm install eslint --save-dev"
-            sh "npm run eslint"
-        }
-    }
 }
