@@ -11,6 +11,7 @@ node {
 
     def git = checkout scm
     stage("Build") {
+        echo sh(returnStdout: true, script: 'env')
         sh 'export color=bla'
         sh 'printenv'
         sh "./scripts/docker_build.sh ${git.GIT_COMMIT}"
