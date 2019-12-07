@@ -19,14 +19,14 @@ rm /var/lib/jenkins/terraform/hgop/production/*.tf
 cp  /var/lib/jenkins/workspace/Pipeline_project/*.tf /var/lib/jenkins/terraform/hgop/production
 
 cd /var/lib/jenkins/terraform/hgop/production
-terraform init # In case terraform is not initialized.
-terraform destroy -auto-approve
-terraform apply -auto-approve
+./terraform init # In case terraform is not initialized.
+./terraform destroy -auto-approve
+./terraform apply -auto-approve
 
 echo "Game API running at " + $(terraform output public_ip)
 
-ssh -o StrictHostKeyChecking=no -i "~/.aws/GameKeyPair.pem" ubuntu@$(terraform output public_ip) "./initialize_game_api_instance.sh"
-ssh -o StrictHostKeyChecking=no -i "~/.aws/GameKeyPair.pem" ubuntu@$(terraform output public_ip) "./docker_compose_up.sh $GIT_COMMIT"
+ssh -o StrictHostKeyChecking=no -i "~/.aws/GameKeyPair.pem" ubuntu@$(./terraform output public_ip) "./initialize_game_api_instance.sh"
+ssh -o StrictHostKeyChecking=no -i "~/.aws/GameKeyPair.pem" ubuntu@$(./terraform output public_ip) "./docker_compose_up.sh $GIT_COMMIT"
 
 #TODO exit on error if deployment fails.
 set -e
