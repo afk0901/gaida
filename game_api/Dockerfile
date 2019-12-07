@@ -9,10 +9,10 @@ COPY package.json package.json
 
 COPY ./ /code
 
-ENV NODE_ENV = production
-
 #Install dependencies depending on the environment and run development things
-RUN if [ "$NODE_ENV" = "production" ]; \
+RUN echo $NODE_ENV;
+
+RUN if [ "$NODE_ENV" = "development" ]; \
 	then npm install;  \
         Run npm install eslint --save-dev; \
          npm run eslint; \
