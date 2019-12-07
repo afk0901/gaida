@@ -10,9 +10,8 @@ node {
 
 
     def git = checkout scm
+    def NODE_ENV = 'production'
     stage("Build") {
-        echo sh(returnStdout: true, script: 'env')
-        sh 'export color=bla'
         sh 'printenv'
         sh "./scripts/docker_build.sh ${git.GIT_COMMIT}"
         sh "docker login --username afk0901 --password LUNDIogfanta199"
