@@ -12,6 +12,10 @@ ENV NODE_ENV production
 #Install dependencies
 RUN npm install
 
+RUN npm install eslint --save-dev
+
+RUN npm run eslint
+
 #Copy database.js to the database.js on the container
 COPY database.js database.js
 
