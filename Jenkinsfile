@@ -13,5 +13,6 @@ node {
         sh "./scripts/docker_build.sh ${git.GIT_COMMIT}"
         sh "docker login --username afk0901 --password LUNDIogfanta199"
         sh "./scripts/docker_push.sh ${git.GIT_COMMIT}"
+        sh "NODE_ENV=production"
     }
 }
