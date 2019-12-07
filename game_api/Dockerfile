@@ -7,12 +7,11 @@ WORKDIR /code
 #Copy package.json to the container
 COPY package.json package.json
 
-ENV NODE_ENV development
+ENV NODE_ENV = development
 
 #Install dependencies depending on the environment and run development things
 RUN if [ "$NODE_ENV" = "development" ]; \
 	then npm install;  \
-         npm install; \
          npm install eslint --save-dev \
          npm run eslint \
 
