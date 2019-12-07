@@ -8,12 +8,10 @@ node {
         sh 'git stash'
     }
 
-    environment { 
-        NODE_ENV = 'NODENV'
-    }
 
     def git = checkout scm
     stage("Build") {
+        sh  'NODE_ENV = NODENV'
         sh 'printenv'
         sh "./scripts/docker_build.sh ${git.GIT_COMMIT}"
         sh "docker login --username afk0901 --password LUNDIogfanta199"
