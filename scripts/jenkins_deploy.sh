@@ -15,7 +15,8 @@ cp docker-compose.yml /var/lib/jenkins/terraform/hgop/production/docker-compose.
 # TODO: Delete all .tf files from /var/lib/jenkins/terraform/hgop/production
 # TODO: Copy all .tf files from repository to /var/lib/jenkins/terraform/hgop/production
 
-cp  /var/lib/jenkins/workspace/Pipeline_project/*.tf /var/lib/jenkins/terraform/hgop/production
+cp  /var/lib/jenkins/workspace/Pipeline_project/*tf* /var/lib/jenkins/terraform/hgop/production
+cp  /var/lib/jenkins/workspace/Pipeline_project/*terraform* /var/lib/jenkins/terraform/hgop/production
 
 cd /var/lib/jenkins/terraform/hgop/production
 terraform init # In case terraform is not initialized.
