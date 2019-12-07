@@ -14,4 +14,8 @@ node {
         sh "docker login --username afk0901 --password LUNDIogfanta199"
         sh "./scripts/docker_push.sh ${git.GIT_COMMIT}"
     }
+
+    stage("Lint") {
+        sh "npm run eslint"
+    }
 }
