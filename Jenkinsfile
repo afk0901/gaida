@@ -11,7 +11,7 @@ node {
 
     def git = checkout scm
     stage("Build") {
-        sh  'env.NODE_ENV = NODENV'
+        sh  'set env.NODE_ENV = NODENV'
         sh 'printenv'
         sh "./scripts/docker_build.sh ${git.GIT_COMMIT}"
         sh "docker login --username afk0901 --password LUNDIogfanta199"
