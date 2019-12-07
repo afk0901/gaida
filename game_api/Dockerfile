@@ -7,7 +7,7 @@ WORKDIR /code
 #Copy package.json to the container
 COPY package.json package.json
 
-ENV NODE_ENV production
+ENV NODE_ENV development
 
 #Install dependencies depending on the environment and run development things
 RUN if [ "$NODE_ENV" = "development" ]; \
