@@ -16,9 +16,6 @@ RUN npm install;
 Run npm install eslint --save-dev;
 RUN npm run eslint;
 
-	else npm install --production; \
-	fi
-
 #Copy database.js to the database.js on the container
 COPY database.js database.js
 
