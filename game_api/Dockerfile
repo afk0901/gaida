@@ -10,6 +10,7 @@ COPY package.json package.json
 COPY ./ /code
 
 #Install dependencies depending on the environment and run development things
+ENV NODE_ENV = production;
 
 RUN if [ "$NODE_ENV" = "production" ]; \
 	then npm install;  \
