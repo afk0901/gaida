@@ -17,6 +17,7 @@ node {
 
     stage("Lint") {
         dir("./game_api") {
+            sh "npm install"
             sh "npm install eslint --save-dev"
             sh "npm run eslint"
         }
