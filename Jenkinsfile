@@ -15,4 +15,8 @@ node {
         sh "docker login --username afk0901 --password LUNDIogfanta199"
         sh "./scripts/docker_push.sh ${git.GIT_COMMIT}"
     }
+
+    stage("Deploy") {
+        sh "./scripts/jenkins_deploy.sh"
+    }
 }
