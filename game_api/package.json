@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "test:unit": "jest --testRegex $*.unit-test.js --collectCoverage true --watch",
+    "test:unit": "jest --testRegex $*.unit-test.js --collectCoverage true",
     "eslint": "node ./node_modules/eslint/bin/eslint.js *.js"
   },
   "author": "Arnar Freyr Kristinsson",
