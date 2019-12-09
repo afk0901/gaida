@@ -16,6 +16,22 @@ node {
         sh "./scripts/docker_push.sh ${git.GIT_COMMIT}"
     }
 
+     stage("Setup") {
+        dir("game_api") {
+            sh "npm install"
+        }
+    }
+    stage("Lint") {
+        dir("game_api") {
+            sh "npm run eslint"
+        }
+    }
+    stage("Test") {
+        dir("game_api") {
+            sh "npm run test:unit"
+        }
+    }
+
     stage("Deploy") {
         sh "./scripts/jenkins_deploy.sh"
     }
