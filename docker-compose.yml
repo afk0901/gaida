@@ -1,7 +1,8 @@
+ 
 version: '3'
 services:
   my_item_repository:
-    image: ${GIT_COMMIT}
+    image: afk0901/item_repository:$GIT_COMMIT
     ports:
     - '3000:3000'
     depends_on:
