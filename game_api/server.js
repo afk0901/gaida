@@ -27,6 +27,11 @@ module.exports = function(context) {
           // database.call1(...);
           // database.call2(...);
           // database.call3(...);
+
+          //Because getTotalNumberOfGames have to happen first, then getTotalNumberOfWins has to happen next and then getTotalNumberOf 21
+          //has to happen last. This is to prevent the christmas tree problem. If you can't play any game, you can't
+          //get total of wins and if you can't get total of wins, you can't get total of 21, So therefore it's needed to be sure that they run
+          //in the right order.
           res.statusCode = 200;
           res.send({
             totalNumberOfGames: totalNumberOfGames,
@@ -52,7 +57,7 @@ module.exports = function(context) {
 
   // Starts a new game.
   app.post('/start', (req, res) => {
-    if (game && game.isGameOver(game) == false) {
+    if (game && game.isGameOver(game) == false && game.playerWon(game) == false) {
       res.statusCode = 409;
       res.send('There is already a game in progress');
     } else {

@@ -25,7 +25,7 @@ module.exports = (context) => {
     // Is the game over (true or false).
     isGameOver: (game) => {
       if ((game.state.total > 21 && game.state.card == undefined) ||
-         (game.state.total < 21 && game.state.card != undefined)) {
+        (game.state.total < 21 && game.state.card != undefined)) {
         return true;
       }
 
@@ -34,22 +34,32 @@ module.exports = (context) => {
     // Has the player won (true or false).
     playerWon: (game) => {
       if ((state.total == 21 && game.state.card == undefined) ||
-         (game.state.total > 21 && game.state.card != undefined)) {
+        (game.state.total > 21 && game.state.card != undefined)) {
         return true;
       }
       return false;
     },
     // The highest score the cards can yield without going over 21 (integer).
     getCardsValue: (game) => {
-      const cards = game.state.cards;
-      let sum = 0;
+      let cardsValue = 0;
 
-      for (let i = 0; i < cards.length; i++) {
-        if (sum <= 21) {
-          sum += game.convertCard(cards[i]);
+      // count everything and treat all aces as 1.
+      for (let i = 0; i < game.state.cards.length; i++) {
+        const cardValue = parseInt(game.state.cards[i].substring(0, 2));
+        cardsValue += Math.min(cardValue, 10);
+      }
+
+      // foreach ace check if we can add 10.
+      for (let i = 0; i < game.state.cards.length; i++) {
+        const cardValue = parseInt(game.state.cards[i].substring(0, 2));
+        if (cardValue == 1) {
+          if (cardsValue + 10 <= 21) {
+            cardsValue += 10;
+          }
         }
       }
-      return sum;
+
+      return cardsValue;
     },
     // The value of the card that should exceed 21 if it exists (integer or undefined).
     getCardValue: (game) => {
@@ -78,8 +88,8 @@ module.exports = (context) => {
     },
 
     getTotal: (game) => {
-      const sum = (card1, card2) => card1 + card2;
-      game.state.total = game.state.playerCardsNumbers.reduce(sum);
+      game.state.total = game.getCardsValue(game) + (game.getCardValue(game) || 0);
+      return game.state.total;
     },
     // The player's cards (array of strings).
     getCards: (game) => {
@@ -135,8 +145,8 @@ module.exports = (context) => {
 
     // Player action (void).
     guess21OrUnder: (game) => {
-      const deck = deckConstructor();
-      const dealer = dealerConstructor();
+      /*const deck = deckConstructor();
+      const dealer = dealerConstructor();*/
       game.state.deck = deck;
       game.state.dealer = dealer;
       game.benefitAces21OrUnder(game);
