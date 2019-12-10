@@ -1,25 +1,42 @@
 const deckConstructor = require('./deck.js');
 const dealerConstructor = require('./dealer.js');
 const lucky21Constructor = require('./lucky21.js');
+const randomConstructor = require('./random.js');
 
-describe('Game API', () => {
-  // Arrange
-  let deck = deckConstructor();
-  deck = [
-    '05C', '01D', '09S', '10H',
-  ];
-
-  const dealer = dealerConstructor();
-  // Override the shuffle to do nothing.
+const newGame = (deck) => {
+  const random = randomConstructor();
+  const dealerDependencies = {
+    'random': (context) => random,
+  };
+  const dealer = dealerConstructor((name) => dealerDependencies[name]);
   dealer.shuffle = (deck) => { };
-  // Inject our dependencies
 
-  const game = lucky21Constructor(deck, dealer);
+  const dependencies = {
+    'deck': () => deck || deckConstructor(),
+    'dealer': () => dealer,
+  };
+  return lucky21Constructor((name) => dependencies[name]);
+};
 
+describe('game - context construction', () => {
+  test('should construct a new game', () => {
+    const context = require('./context.js').newContext();
+
+    const gameConstructor = context('lucky21');
+
+    const game = gameConstructor(context);
+
+    expect(game).not.toEqual(50);
+  });
+});
+
+  const game = newGame(['09S', '10H']);
   // checking if player has two cards initally,
   // the dealer should set the first two cards as the last two cards in the unshuffled deck
   test('The player should have the last two cards initally', () => {
-    // Assert
+
+    
+    console.log(game.state);
     expect(game.state.cards[0]).toEqual('10H');
     expect(game.state.cards[1]).toEqual('09S');
   });
@@ -40,21 +57,22 @@ describe('Game API', () => {
     expect(game.getCardValue(game)).not.toBeDefined();
   });
 
-  test('The Jack, Queen and King should worth 10 points each', () => {
-    const gameCheckJackQueenKingValue = lucky21Constructor(deck, dealer);
-    gameCheckJackQueenKingValue.state.playerCardsNumbers = [8, 11, 12, 13];
-    gameCheckJackQueenKingValue.getTotal(gameCheckJackQueenKingValue);
-    expect(gameCheckJackQueenKingValue.state.total).toEqual(38);
-  });
+   // checking if conertCards converts the cards into its number
+   describe('The function convertCards should convert the players cards to numbers', () => {
 
-  // checking if conertCards converts the cards into its number
-  describe('The function convertCards should convert the players cards to numbers', () => {
-    game.convertCards(game);
-    const expectedPlayerCardsNumbers = [10, 9];
+    const convertgame = newGame(['09S', '10H']);
+    convertgame.convertCards(convertgame);
 
     test('All of the cards should be a number', () => {
-      expect(game.state.playerCardsNumbers).toEqual(expect.arrayContaining(expectedPlayerCardsNumbers));
+      expect(convertgame.state.playerCardsNumbers).toEqual([10, 9]);
     });
+  });
+
+  test('The Jack, Queen and King should worth 10 points each', () => {;
+    game.state.cards = ['8S', '11D', '12H','13D'];
+    game.convertCards(game);
+    game.getTotal(game);
+    expect(game.state.total).toEqual(38);
   });
 
   // Checking if getTotal works as expected
@@ -70,25 +88,26 @@ describe('Game API', () => {
   });
 
   describe('The function guessOver21 should draw the final card', () => {
-    const gameOver21CheckAces = lucky21Constructor(deck, dealer);
-    gameOver21CheckAces.state.cards = ['10S', '1S', '1D', '1D'];
-    gameOver21CheckAces.guessOver21(gameOver21CheckAces);
-
+    const gameOver21CheckAces = newGame(['1S', '5S','1D']);
+    gameOver21CheckAces.state.cards.push('1D');
     test('card should be defined', () => {
+     
+      gameOver21CheckAces.guessOver21(gameOver21CheckAces);
       expect(gameOver21CheckAces.state.card).toBeDefined();
     });
 
-    test('aces should be only be 11 in game.state.playerCardsNumbers', () => {
-      expect(gameOver21CheckAces.state.playerCardsNumbers).toEqual([10, 11, 11, 11]);
+   test('aces should be only be 11 in game.state.playerCardsNumbers', () => {
+      expect(gameOver21CheckAces.state.playerCardsNumbers.sort()).toEqual([11,5,11].sort());
     });
-
-    const gameOver21 = lucky21Constructor(deck, dealer);
+  
     describe('isGameOver should be true if less than or equal 21', () => {
-      gameOver21.state.cards = ['10S', '03D', '08H'];
+      const gameOver21 = newGame(['03D', '08H']);
+      gameOver21.state.cards.push('10D');
+
       gameOver21.guessOver21(gameOver21);
       const cardState = gameOver21.state.card;
 
-      test('The function getCardValue should get be the players card as a number as there is a player card', () => {
+test('The function getCardValue should get be the players card as a number as there is a player card', () => {
         gameOver21.state.card = '5S';
         console.log(gameOver21.state);
         expect(gameOver21.getCardValue(gameOver21)).toEqual(5);
@@ -100,46 +119,65 @@ describe('Game API', () => {
         expect(typeof gameOver21.state.card).toEqual('string');
       });
 
-      // Testing equal 21
-      test('isGameOver should be true if total cards are 21 and card is defined', () => {
-        expect(gameOver21.state.card).toBeDefined();
-        expect(gameOver21.state.total).toEqual(21);
+      test('isGameOver should be true if card is defined', () => {
+        const gameOver21CheckDefinedGameOver = newGame(['08D', '8H','5S']);
+
+        gameOver21CheckDefinedGameOver.guessOver21(gameOver21CheckDefinedGameOver);
+        console.log(gameOver21CheckDefinedGameOver.state.card);
+        expect(gameOver21CheckDefinedGameOver.state.card).toBeDefined();
       });
 
-      const gameOver21Less = lucky21Constructor(deck, dealer);
-      gameOver21Less.state.cards = [];
-      gameOver21Less.state.cards = ['10S', '03D', '07H'];
-      gameOver21Less.guessOver21(gameOver21Less);
+        test('isGameOver should be true if total cards are 21', () => {
+        const gameOver21CheckGameOver = newGame(['08D', '8H']);
+        gameOver21CheckGameOver.state.cards.push('5S');
+       
+        console.log(gameOver21CheckGameOver.state.playerCardsNumbers);
+        gameOver21CheckGameOver.guessOver21(gameOver21CheckGameOver);
+        
+        expect(gameOver21CheckGameOver.state.total).toEqual(21);
+      });
 
-      test('card should be defined and should be a string', () => {
+      
+     test('card should be defined and should be a string', () => {
         expect(gameOver21.state.card).toBeDefined();
         expect(typeof gameOver21.state.card).toEqual('string');
       });
 
       test('getCard should return the card', () => {
-        const gameCheckgetCard = lucky21Constructor(deck, dealer);
+        const gameCheckgetCard = newGame(['03D', '08H']);
         expect(gameCheckgetCard.getCard(gameCheckgetCard)).toEqual(gameCheckgetCard.state.card);
       });
 
       // Testing less than 21
-      test('isGameOver should be true if total cards are less than 21 and card is defined', () => {
+        test('isGameOver should be true if total cards are less than 21 and card is defined', () => {
+        const gameOver21Less = newGame(['10S', '03D', '07H']);
+        gameOver21Less.guessOver21(gameOver21Less);
         expect(gameOver21Less.state.total).toBeLessThan(21);
         expect(gameOver21Less.isGameOver(gameOver21Less)).toBeTruthy();
         expect(gameOver21Less.state.card).toBeDefined();
       });
     });
 
-    describe('playerWon should be true if over 21', () => {
-      const gameWin21 = lucky21Constructor(deck, dealer);
-      gameWin21.state.cards = ['10S', '9D', '10H'];
+   describe('playerWon should be true if over 21', () => {
+      const gameWin21 = newGame(['9D','10H','10S']);
+      gameWin21.state.cards.push('9D');
+      console.log(gameWin21.state.cards);
+  
       gameWin21.guessOver21(gameWin21);
+      console.log(gameWin21.state.total);
 
       test('getCardValue should return the card', () => {
-        expect(gameOver21.getCard(gameOver21)).toEqual(gameOver21.state.card);
+        expect(gameWin21.getCard(gameWin21)).toEqual(gameWin21.state.card);
       });
 
       test('playerWon should be true if card is defined', () => {
-        expect(gameOver21.state.card).toBeDefined();
+        //gameWin21.guessOver21(gameWin21);
+        expect(gameWin21.state.card).toBeDefined();
+        //const gameWin21Truth = newGame(['10S', '9D']);
+    
+       
+        console.log(gameWin21.state.total);
+        console.log(game.state.card);
         expect(gameWin21.playerWon(gameWin21)).toBeTruthy();
       });
     });
@@ -148,47 +186,52 @@ describe('Game API', () => {
   // Testing the guess21OrUnder
   describe('The function guess21OrUnder should draw the next card', () => {
     // Act
-    const gameUnder21CheckAces = lucky21Constructor(deck, dealer);
-    gameUnder21CheckAces.state.cards = ['7S', '1S', '1D'];
+   
+    const gameUnder21CheckAces = newGame(['5S', '1D']);
+    gameUnder21CheckAces.state.cards.push('1H');
     gameUnder21CheckAces.benefitAces21OrUnder(gameUnder21CheckAces);
     gameUnder21CheckAces.guess21OrUnder(gameUnder21CheckAces);
 
-    test('card sohuld be undefined', () => {
+    test('card should be undefined', () => {
       expect(gameUnder21CheckAces.state.card).not.toBeDefined();
     });
 
-    describe('An Ace is worth 1 or 11 points depending on which is most beneficial to the player'+
+     describe('An Ace is worth 1 or 11 points depending on which is most beneficial to the player'+
             '(under21Selected)', () => {
-      test('One ace should change to 11 if total + 11 is less than 21', () => {
-        expect(gameUnder21CheckAces.state.total).toEqual(20);
+        test('One ace should change to 11 if total + 11 is less than 21', () => {
+        expect(gameUnder21CheckAces.state.total).toEqual(17);
       });
 
       test('game.state.playerCardsNumbers should contain 11 and only one 11', () => {
-        expect(gameUnder21CheckAces.state.playerCardsNumbers).toEqual([7, 11, 1]);
+        expect(gameUnder21CheckAces.state.playerCardsNumbers.sort()).toEqual([5, 1, 11].sort());
       });
 
-      const gameUnder21CheckAcesOver21 = lucky21Constructor(deck, dealer);
-      gameUnder21CheckAcesOver21.state.cards = ['10S', '1S', '10S', '10D', '1D'];
-      gameUnder21CheckAcesOver21.benefitAces21OrUnder(gameUnder21CheckAcesOver21);
+      const gameUnder21CheckAcesOver21 = newGame(['10S', '1S']);
+
+      gameUnder21CheckAcesOver21.state.cards.push('10S');
+      gameUnder21CheckAcesOver21.state.cards.push('10D');
+      gameUnder21CheckAcesOver21.state.cards.push('1D');
+
+      gameUnder21CheckAcesOver21.guess21OrUnder(gameUnder21CheckAcesOver21);
 
       test('Total should stay the same if total + 11 is greater than 21', () => {
         expect(gameUnder21CheckAcesOver21.state.total).toEqual(32);
       });
 
       test('game.state.playerCardsNumbers should not contain 11 if total 11 is greater than 21', () => {
-        expect(gameUnder21CheckAcesOver21.state.playerCardsNumbers).toEqual([10, 1, 10, 10, 1]);
+        expect(gameUnder21CheckAcesOver21.state.playerCardsNumbers.sort()).toEqual([10, 1, 10, 10, 1].sort());
       });
     });
 
     test('getCardValue should return the card', () => {
-      expect(game.getCard(game)).not.toBeDefined();
+      const cardvalueGame = newGame(['09S', '10H']);
+      expect(cardvalueGame.getCard(cardvalueGame)).not.toBeDefined();
     });
 
     // Add the new card if the game is not over
     describe('The game should continue if there is no win or no gameover', () => {
-      const gameContinue = lucky21Constructor(deck, dealer);
+      const gameContinue = newGame(['10S', '03D', '05H']);
       const oldLength = gameContinue.state.cards.length; // Initial length
-      gameContinue.state.cards = ['10S', '03D', '05H'];
       console.log(oldLength);
 
       gameContinue.guess21OrUnder(gameContinue);
@@ -205,13 +248,12 @@ describe('Game API', () => {
       test('isGameOver should be false as there should not be any win or game over', () => {
         expect(gameContinue.isGameOver(gameContinue)).toBeFalsy();
       });
-
       // Tests for continue - end
 
       // Tests for playerWon
       // Simulate a win for guess21OrUnder function
-      const gameWin = lucky21Constructor(deck, dealer);
-      gameWin.state.cards = ['10S', '03D', '08H'];
+      const gameWin = newGame( ['10S', '03D']);
+      gameWin.state.cards.push('08H');
       const old = gameWin.state.cards.length; // Initial length
       gameWin.guess21OrUnder(gameWin);
 
@@ -229,10 +271,9 @@ describe('Game API', () => {
 
     // Testing gameOver from guess21OrUnder (if guess is 21 or under)
     describe('guess21OrUnder should produce a game over if total is over 21', () => {
-      // Prevent collisions - mocking the cards array
-      const gameGameOver = lucky21Constructor(deck, dealer);
-      gameGameOver.state.cards = ['10S', '10D', '10H'];
-
+      const gameGameOver = newGame( ['10D', '10H']);
+      gameGameOver.state.cards.push('10S');
+      
       gameGameOver.guess21OrUnder(gameGameOver);
 
       test('isGameOver should return true (guess21OrUnder)', () => {
@@ -240,44 +281,42 @@ describe('Game API', () => {
       });
     });
     // Testing the guess21OrUnder - end
-
+  
     // Testing the playerWon function
     describe('The function playerWon should return false if the card total is NOT equal to 21'+
             'but true if it is equal to 21', () => {
-      game.getTotal(game);
+      const gameplayerWon = newGame(['10S', '03D', '05H']);
+      gameplayerWon.convertCards(gameplayerWon);
+      gameplayerWon.getTotal(gameplayerWon);
       test('The total should NOT be equal to 21, because the player has not won the game', () => {
-        expect(game.state.total).not.toEqual(21);
+        expect(gameplayerWon.state.total).not.toEqual(21);
       });
 
       test('The function playerWon should return false, because the player has NOT won the game', () => {
-        expect(game.playerWon(game)).toBeFalsy();
+        expect(gameplayerWon.playerWon(gameplayerWon)).toBeFalsy();
       });
 
       describe('The function playerWon should return true if the card total is equal to 21'+
               'but false if it is NOT equal to 21', () => {
-        // Simulating a win (under 21)
-        deck.push('19S');
-        deck.push('2S');
-        const game = lucky21Constructor(deck, dealer);
+       
+        const gameplayerWon = newGame(['10S', '03D', '05H', '19S', '2S']);
 
-        game.convertCards(game);
-        game.getTotal(game);
+        gameplayerWon.convertCards(gameplayerWon);
+        gameplayerWon.getTotal(gameplayerWon);
 
         test('The function getTotal should return 21 because there is a winner', () => {
-          expect(game.state.total).toEqual(21);
+          expect(gameplayerWon.state.total).toEqual(21);
         });
 
         test('The function playerWon should return true, because the player has won the game', () => {
-          expect(game.playerWon(game)).toBeTruthy();
+          expect(gameplayerWon.playerWon(gameplayerWon)).toBeTruthy();
         });
       });
 
       // Testing the isGameOver function
       describe('The isGameOver function should return true ONLY if the card total is above 21', () => {
-        // Simulating a game over (under 21)
-        deck.push('21S');
-        deck.push('11S');
-        const game = lucky21Constructor(deck, dealer);// Preventing a mess up
+        
+        const game = newGame(['10S', '03D', '05H', '21S', '11S']);
         game.convertCards(game);
         game.getTotal(game);
 
@@ -296,12 +335,14 @@ describe('Game API', () => {
         test('card in gamestate should be undefined', () => {
           expect(game.state.card).not.toBeDefined();
         });
+      });
 
         // Testing when it's not game over
         describe('isGameOver should return false if number is less than 21', () => {
-          const gameLess = lucky21Constructor(deck, dealer);// Preventing mess up
+          
+         
           // Simulating not game over
-          gameLess.state.cards = ['10S', '9D', '1H'];
+          const gameLess = newGame(['10S', '9D', '1H']);
           gameLess.convertCards(game);
           gameLess.getTotal(game);
 
@@ -321,5 +362,3 @@ describe('Game API', () => {
         });
       });
     });
-  });
-});
