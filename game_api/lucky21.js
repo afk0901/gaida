@@ -1,28 +1,28 @@
 module.exports = (context) => {
-  let deckConstructor = context('deck');
-  let deck = deckConstructor(context);
-  
-  let dealerConstructor = context('dealer');
-  let dealer = dealerConstructor(context);
-  
+  const deckConstructor = context('deck');
+  const deck = deckConstructor(context);
+
+  const dealerConstructor = context('dealer');
+  const dealer = dealerConstructor(context);
+
   dealer.shuffle(deck);
-  let card0 = dealer.draw(deck);
-  let card1 = dealer.draw(deck);
-  let state = {
-      deck: deck,
-      dealer: dealer,
-      cards: [
-          card0,
-          card1,
-      ],
-      // The card that the player thinks will exceed 21.
-      card: undefined,
-      playerCardsNumbers: [],
-      total: 0
+  const card0 = dealer.draw(deck);
+  const card1 = dealer.draw(deck);
+  const state = {
+    deck: deck,
+    dealer: dealer,
+    cards: [
+      card0,
+      card1,
+    ],
+    // The card that the player thinks will exceed 21.
+    card: undefined,
+    playerCardsNumbers: [],
+    total: 0,
   };
   return {
-      state: state,
-       // Is the game over (true or false).
+    state: state,
+    // Is the game over (true or false).
     isGameOver: (game) => {
       if ((game.state.total > 21 && game.state.card == undefined) ||
          (game.state.total < 21 && game.state.card != undefined)) {
@@ -33,7 +33,6 @@ module.exports = (context) => {
     },
     // Has the player won (true or false).
     playerWon: (game) => {
-      
       if ((state.total == 21 && game.state.card == undefined) ||
          (game.state.total > 21 && game.state.card != undefined)) {
         return true;
@@ -68,9 +67,8 @@ module.exports = (context) => {
       game.state.playerCardsNumbers = [];
       for (let i = 0; i < game.state.cards.length; i++) {
         let convertedCard = game.state.cards[i].slice(0, -1);
-         
-        if(convertedCard == 11 || convertedCard == 12 || convertedCard == 13)
-        {
+
+        if (convertedCard == 11 || convertedCard == 12 || convertedCard == 13) {
           convertedCard = 10;
         }
 
@@ -124,16 +122,15 @@ module.exports = (context) => {
       console.log(game.state.cards);
       console.log(game.state.playerCardsNumbers);
       console.log(game.state.playerCardsNumbers);
-      
+
       console.log(game.state.playerCardsNumbers);
       // Set all aces to 11
-    for (let i = 0; i < game.state.playerCardsNumbers.length; i++) {
+      for (let i = 0; i < game.state.playerCardsNumbers.length; i++) {
         if (game.state.playerCardsNumbers[i] == 1) {
           game.state.playerCardsNumbers[i] = 11;
         }
       }
       console.log(game.state.playerCardsNumbers);
-  
     },
 
     // Player action (void).
@@ -144,7 +141,7 @@ module.exports = (context) => {
       game.state.dealer = dealer;
       game.benefitAces21OrUnder(game);
       game.getTotal(game);
-    
+
       // Continue the game if no win or no loose
       if (game.playerWon(game) == false && game.isGameOver(game) == false) {
         game.state.cards.push(dealer.draw(deck));
@@ -157,22 +154,21 @@ module.exports = (context) => {
       game.getTotal(game);
       const nextCard = dealer.draw(game.state.deck);
       game.state.card = nextCard;
-      //game.playerWon(game);
+      // game.playerWon(game);
       console.log(game.state.cards);
       console.log(game.state.playerCardsNumbers);
       console.log(game.state.card);
-      
     },
-      getState: (game) => {
-          return {
-              cards: game.state.cards,
-              cardsValue: game.getCardsValue(game),
-              card: game.state.card,
-              cardValue: game.getCardValue(game),
-              total: game.getTotal(game),
-              gameOver: game.isGameOver(game),
-              playerWon: game.playerWon(game),
-          };
-      },
+    getState: (game) => {
+      return {
+        cards: game.state.cards,
+        cardsValue: game.getCardsValue(game),
+        card: game.state.card,
+        cardValue: game.getCardValue(game),
+        total: game.getTotal(game),
+        gameOver: game.isGameOver(game),
+        playerWon: game.playerWon(game),
+      };
+    },
   };
 };
