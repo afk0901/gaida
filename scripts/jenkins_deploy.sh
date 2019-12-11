@@ -16,8 +16,6 @@ cp docker-compose.yml /var/lib/jenkins/terraform/hgop/production/docker-compose.
 rm -f /var/lib/jenkins/terraform/hgop/production/*.tf
 cp ./*.tf /var/lib/jenkins/terraform/hgop/production/
 
-cp /var/lib/jenkins/workspace/Pipeline_project/scripts /var/lib/jenkins/terraform/hgop/production/scripts
-
 cd /var/lib/jenkins/terraform/hgop/production
 ./terraform init # In case terraform is not initialized.
 ./terraform force-unlock
@@ -25,7 +23,7 @@ cd /var/lib/jenkins/terraform/hgop/production
 ./terraform apply -auto-approve -var environment=production  || exit 1
 
 echo "Game API running at " + $(./terraform output public_ip)
-
+cd /var/lib/jenkins/terraform/hgop/production/scripts
 ssh -o StrictHostKeyChecking=no -i "~/.aws/GameKeyPair.pem" ubuntu@$(./terraform output public_ip) "./initialize_game_api_instance.sh"
 ssh -o StrictHostKeyChecking=no -i "~/.aws/GameKeyPair.pem" ubuntu@$(./terraform output public_ip) "./docker_compose_up.sh $GIT_COMMIT"
 
