@@ -67,16 +67,16 @@ resource "aws_instance" "game_server" {
   #The host is found by getting the public IP address or private IP address
   #depending on wich one is defined, if both definded somehow, the public one
   #is used.
-  provisioner "file" {
-    source      = "scripts/initialize_game_api_instance.sh"
-    destination = "/home/ubuntu/initialize_game_api_instance.sh"
+  #provisioner "file" {
+   # source      = "scripts/initialize_game_api_instance.sh"
+    #destination = "/home/ubuntu/initialize_game_api_instance.sh"
 
-    connection {
-      host        = coalesce(self.public_ip, self.private_ip)
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = file("~/.aws/GameKeyPair.pem")
-    }
+    #connection {
+     # host        = coalesce(self.public_ip, self.private_ip)
+      #type        = "ssh"
+      #user        = "ubuntu"
+      #private_key = file("~/.aws/GameKeyPair.pem")
+    #}
   }
 
   # Adds the docker compose file to a specific place in the instance. 
