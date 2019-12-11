@@ -1,10 +1,8 @@
+
 # Top of file
 variable "environment" {
   type = string
 }
-
-
-
 
 #Defines the provider, in this case AWS and where it can find the
 #credentials of the instance. The provider is AWS in this case
@@ -13,6 +11,7 @@ provider "aws" {
   shared_credentials_file = "~/.aws/credentials"
   region                  = "us-east-1"
 }
+
 #Sets the security group in AWS wich defines what's allowed and what's not allowed. 
 #Each Ingress rule defines an inbound rule to permit instances to recive traffic. 
 #In this case it's allowed to recive traffic from and to port 22
@@ -20,8 +19,9 @@ provider "aws" {
 #Each egress rule defines a outbound rule that allows instances to send traffic.
 #In this case it's allowed to send traffic from any port from any IP address.  
 resource "aws_security_group" "game_security_group" {
-  # Usages
-  name   = "GameSecurityGroup_${var.environment}"
+name   = "GameSecurityGroup_${var.environment}"
+
+
 
   ingress {
     from_port   = 22
