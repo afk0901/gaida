@@ -29,7 +29,7 @@ module.exports = function(context) {
           // database.call3(...);
 
           //Because getTotalNumberOfGames have to happen first, then getTotalNumberOfWins has to happen next and then getTotalNumberOf 21
-          //has to happen last. This is to prevent the christmas tree problem. If you can't play any game, you can't
+          //has to happen last. This is to prevent the christmas tree problem. If you have not played any game, you can't
           //get total of wins and if you can't get total of wins, you can't get total of 21, So therefore it's needed to be sure that they run
           //in the right order.
           res.statusCode = 200;
@@ -119,7 +119,7 @@ module.exports = function(context) {
       } else {
         game.guessOver21(game);
         if (game.isGameOver(game)) {
-          const won = game.playerWon(game);
+          const won = game.getState(game).playerWon;
           const score = game.getCardsValue(game);
           const total = game.getTotal(game);
           database.insertResult(won, score, total, () => {

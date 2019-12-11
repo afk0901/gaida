@@ -252,9 +252,6 @@ describe('The function guess21OrUnder should draw the next card', () => {
     const old = gameWin.state.cards.length; // Initial length
     gameWin.guess21OrUnder(gameWin);
 
-    test('isGameOver should be false as there should be win', () => {
-      expect(gameWin.isGameOver(gameWin)).toBeFalsy();
-    });
     test('playerWon should be true as there should be win', () => {
       expect(gameWin.playerWon(gameWin)).toBeTruthy();
     });

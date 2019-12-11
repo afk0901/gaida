@@ -29,6 +29,11 @@ module.exports = (context) => {
         return true;
       }
 
+      if(game.playerWon(game))
+      {
+        return true;
+      }
+
       return false;
     },
     // Has the player won (true or false).
@@ -145,8 +150,6 @@ module.exports = (context) => {
 
     // Player action (void).
     guess21OrUnder: (game) => {
-      /*const deck = deckConstructor();
-      const dealer = dealerConstructor();*/
       game.state.deck = deck;
       game.state.dealer = dealer;
       game.benefitAces21OrUnder(game);
@@ -164,7 +167,7 @@ module.exports = (context) => {
       game.getTotal(game);
       const nextCard = dealer.draw(game.state.deck);
       game.state.card = nextCard;
-      // game.playerWon(game);
+      game.playerWon(game);
       console.log(game.state.cards);
       console.log(game.state.playerCardsNumbers);
       console.log(game.state.card);
