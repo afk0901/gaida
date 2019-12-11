@@ -19,7 +19,7 @@ provider "aws" {
 #Each egress rule defines a outbound rule that allows instances to send traffic.
 #In this case it's allowed to send traffic from any port from any IP address.  
 resource "aws_security_group" "game_security_group" {
-  name = "GameSecurityGroup_${var.environment}
+  name = "GameSecurityGroup_${var.environment}"
 
   ingress {
     from_port   = 22
