@@ -29,8 +29,7 @@ module.exports = (context) => {
         return true;
       }
 
-      if(game.playerWon(game))
-      {
+      if (game.playerWon(game)) {
         return true;
       }
 

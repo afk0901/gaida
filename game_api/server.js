@@ -28,10 +28,13 @@ module.exports = function(context) {
           // database.call2(...);
           // database.call3(...);
 
-          //Because getTotalNumberOfGames have to happen first, then getTotalNumberOfWins has to happen next and then getTotalNumberOf 21
-          //has to happen last. This is to prevent the christmas tree problem. If you have not played any game, you can't
-          //get total of wins and if you can't get total of wins, you can't get total of 21, So therefore it's needed to be sure that they run
-          //in the right order.
+          // Because getTotalNumberOfGames have to happen first,
+          // then getTotalNumberOfWins has to happen next and then getTotalNumberOf 21
+          // has to happen last. This is to prevent the christmas tree problem.
+          // If you have not played any game, you can't
+          // get total of wins and if you can't get total of wins, you can't get total of 21,
+          // So therefore it's needed to be sure that they run
+          // in the right order.
           res.statusCode = 200;
           res.send({
             totalNumberOfGames: totalNumberOfGames,
