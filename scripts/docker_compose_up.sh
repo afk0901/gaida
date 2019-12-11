@@ -1,5 +1,6 @@
 #!/bin/bash
 
-export GIT_COMMIT=$1
+export GIT_COMMIT
+echo $GIT_COMMIT
 docker-compose down
-GIT_COMMIT=$1 docker-compose up
+docker-compose up
