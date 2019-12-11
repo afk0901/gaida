@@ -20,8 +20,8 @@ cp  /var/lib/jenkins/workspace/Pipeline_project/*.tf /var/lib/jenkins/terraform/
 
 cd /var/lib/jenkins/terraform/hgop/production
 ./terraform init # In case terraform is not initialized.
-./terraform destroy -auto-approve -var environment=production || exit 1
-./terraform apply -auto-approve -var environment=production || exit 1
+./terraform destroy -auto-approve
+./terraform apply -auto-approve
 
 echo "Game API running at " + $(./terraform output public_ip)
 
