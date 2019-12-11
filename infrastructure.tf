@@ -1,7 +1,3 @@
-# Top of file
-variable "environment" {
-  type = string
-}
 
 #Defines the provider, in this case AWS and where it can find the
 #credentials of the instance. The provider is AWS in this case
