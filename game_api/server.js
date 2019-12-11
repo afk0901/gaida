@@ -34,7 +34,7 @@ module.exports = function(context) {
           // If you have not played any game, you can't
           // get total of wins and if you can't get total of wins, you can't get total of 21,
           // So therefore it's needed to be sure that they run
-          // in the right order. database.js in this case, will "send" the data up to these functions
+          // in the right order. database.js in this case, will "send" the data up to these parameters
 
           res.statusCode = 200;
           res.send({
