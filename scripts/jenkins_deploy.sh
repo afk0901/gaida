@@ -16,6 +16,8 @@ cp docker-compose.yml /var/lib/jenkins/terraform/hgop/production/docker-compose.
 rm -f /var/lib/jenkins/terraform/hgop/production/*.tf
 cp ./*.tf /var/lib/jenkins/terraform/hgop/production/
 
+cp /var/lib/jenkins/workspace/Pipeline_project/scripts /var/lib/jenkins/terraform/hgop/production/scripts
+
 cd /var/lib/jenkins/terraform/hgop/production
 ./terraform init # In case terraform is not initialized.
 ./terraform force-unlock
