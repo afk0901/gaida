@@ -24,6 +24,6 @@ cd /var/lib/jenkins/terraform/hgop/production
 
 echo "Game API running at " + $(./terraform output public_ip)
 ssh -o StrictHostKeyChecking=no -i "~/.aws/GameKeyPair.pem" ubuntu@$(./terraform output public_ip) "/var/lib/jenkins/terraform/hgop/production/scripts/initialize_game_api_instance.sh"
-ssh -o StrictHostKeyChecking=no -i "~/.aws/GameKeyPair.pem" ubuntu@$(./terraform output public_ip) "/var/lib/jenkins/terraform/hgop/production/scripts/docker_compose_up.sh $GIT_COMMIT"
+ssh -o StrictHostKeyChecking=no -i "~/.aws/GameKeyPair.pem" ubuntu@$(./terraform output public_ip) "/var/lib/jenkin/terraform/hgop/production/scripts/docker_compose_up.sh $GIT_COMMIT"
 
 exit 0

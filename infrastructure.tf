@@ -76,6 +76,18 @@ resource "aws_instance" "game_server" {
       private_key = file("~/.aws/GameKeyPair.pem")
     }
   }
+   #Adds the docker compose script to the instance
+   provisioner "file" {
+    source      = "/var/lib/jenkins/terraform/hgop/production/scripts/docker_compose_up.sh"
+    destination = "/home/ubuntu/docker_compose_up.sh"
+
+    connection {
+      host        = coalesce(self.public_ip, self.private_ip)
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = file("~/.aws/GameKeyPair.pem")
+    }
+  }
 
   # Adds the docker compose file to a specific place in the instance. 
   #Besides that, it does the same thing as the configuration above.
