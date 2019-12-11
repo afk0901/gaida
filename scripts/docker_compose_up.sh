@@ -1,11 +1,8 @@
 #!/bin/bash
 set -euxo pipefail
 
-GIT_COMMIT=$1
-export GIT_COMMIT
+export GIT_COMMIT=$1
 docker-compose down
-docker-compose up
-
-exit(0)
+docker-compose up -d
 
 
