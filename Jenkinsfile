@@ -42,8 +42,6 @@ node {
 
     stage("Deploy") {
         sh "./scripts/jenkins_deploy.sh"
-        sh "./terraform destroy -auto-approve -var environment=production || exit 1"
-        sh "./terraform apply -auto-approve -var environment=production || exit 1"
     }
 
     
