@@ -1,6 +1,12 @@
 #Defines the provider, in this case AWS and where it can find the
 #credentials of the instance. The provider is AWS in this case
 #and credentials are stored in ~/.aws/credentials
+
+# Top of file
+variable "environment" {
+  type = string
+}
+
 provider "aws" {
   shared_credentials_file = "~/.aws/credentials"
   region                  = "us-east-1"
@@ -13,7 +19,7 @@ provider "aws" {
 #Each egress rule defines a outbound rule that allows instances to send traffic.
 #In this case it's allowed to send traffic from any port from any IP address.  
 resource "aws_security_group" "game_security_group" {
-  name = "GameSecurityGroup"
+  name = "GameSecurityGroup_${var.environment}"
 
   ingress {
     from_port   = 22
@@ -49,7 +55,7 @@ resource "aws_instance" "game_server" {
   key_name               = "GameKeyPair"
   vpc_security_group_ids = [aws_security_group.game_security_group.id]
   tags = {
-    Name = "GameServer"
+    Name = "GameServer_${var.environment}"
   }
 
   # Adds the initialize script to a specific place in the instance
