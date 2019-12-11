@@ -90,8 +90,8 @@ resource "aws_instance" "game_server" {
       #type        = "ssh"
       #user        = "ubuntu"
       #private_key = file("~/.aws/GameKeyPair.pem")
-    #}
-  }
+    }
+  #}
 
   # This is used to run commands on the instance we just created.
   # Terraform does this by SSHing into the instance and then executing the commands.
