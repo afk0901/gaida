@@ -76,8 +76,8 @@ resource "aws_instance" "game_server" {
       #type        = "ssh"
       #user        = "ubuntu"
       #private_key = file("~/.aws/GameKeyPair.pem")
-    #}
-  }
+    }
+  #}
 
   # Adds the docker compose file to a specific place in the instance. 
   #Besides that, it does the same thing as the configuration above.
