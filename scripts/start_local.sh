@@ -2,5 +2,5 @@
 
 set -euxo pipefail
 
-docker build ../game_api -t afk0901/game_api:dev
-GIT_COMMIT=dev docker-compose up
+docker build ../game_api -t afk0901/game_api:$GIT_COMMIT
+GIT_COMMIT=$1 docker-compose up
