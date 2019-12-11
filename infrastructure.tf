@@ -67,31 +67,31 @@ resource "aws_instance" "game_server" {
   #The host is found by getting the public IP address or private IP address
   #depending on wich one is defined, if both definded somehow, the public one
   #is used.
-  #provisioner "file" {
-   # source      = "scripts/initialize_game_api_instance.sh"
-    #destination = "/home/ubuntu/initialize_game_api_instance.sh"
+  provisioner "file" {
+    source      = "scripts/initialize_game_api_instance.sh"
+    destination = "/home/ubuntu/initialize_game_api_instance.sh"
 
-    #connection {
-     # host        = coalesce(self.public_ip, self.private_ip)
-      #type        = "ssh"
-      #user        = "ubuntu"
-      #private_key = file("~/.aws/GameKeyPair.pem")
-    #}
-  #}
+    connection {
+      host        = coalesce(self.public_ip, self.private_ip)
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = file("~/.aws/GameKeyPair.pem")
+    }
+  }
 
   # Adds the docker compose file to a specific place in the instance. 
   #Besides that, it does the same thing as the configuration above.
-  #provisioner "file" {
-   # source      = "docker-compose.yml"
-    #destination = "/home/ubuntu/docker-compose.yml"
+  provisioner "file" {
+    source      = "docker-compose.yml"
+    destination = "/home/ubuntu/docker-compose.yml"
 
-    #connection {
-     # host        = coalesce(self.public_ip, self.private_ip)
-      #type        = "ssh"
-      #user        = "ubuntu"
-      #private_key = file("~/.aws/GameKeyPair.pem")
-    #}
-  #}
+    connection {
+      host        = coalesce(self.public_ip, self.private_ip)
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = file("~/.aws/GameKeyPair.pem")
+    }
+  }
 
   # This is used to run commands on the instance we just created.
   # Terraform does this by SSHing into the instance and then executing the commands.
@@ -100,18 +100,18 @@ resource "aws_instance" "game_server" {
   # that way we know the instance is available through SSH after Terraform finishes.
   # When Terraform connects through SSH, it gives the initialize script an execution
   #permission.
-  #provisioner "remote-exec" {
-   # inline = [
-    #  "chmod +x /home/ubuntu/initialize_game_api_instance.sh",
-    #]
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /home/ubuntu/initialize_game_api_instance.sh",
+    ]
 
-    #connection {
-     # host        = coalesce(self.public_ip, self.private_ip)
-      #type        = "ssh"
-      #user        = "ubuntu"
-      #private_key = file("~/.aws/GameKeyPair.pem")
-   # }
-  #}
+    connection {
+      host        = coalesce(self.public_ip, self.private_ip)
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = file("~/.aws/GameKeyPair.pem")
+    }
+  }
 }
 
 # Gets the instance public IP address and stores it in the public_ip variable
