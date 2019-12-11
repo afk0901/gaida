@@ -77,7 +77,7 @@ resource "aws_instance" "game_server" {
       #user        = "ubuntu"
       #private_key = file("~/.aws/GameKeyPair.pem")
     #}
-  }
+  #}
 
   # Adds the docker compose file to a specific place in the instance. 
   #Besides that, it does the same thing as the configuration above.
@@ -100,7 +100,7 @@ resource "aws_instance" "game_server" {
   # that way we know the instance is available through SSH after Terraform finishes.
   # When Terraform connects through SSH, it gives the initialize script an execution
   #permission.
-  provisioner "remote-exec" {
+  #provisioner "remote-exec" {
     inline = [
       "chmod +x /home/ubuntu/initialize_game_api_instance.sh",
     ]
