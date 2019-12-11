@@ -2,4 +2,4 @@
 
 export GIT_COMMIT=$1
 docker-compose down
-GIT_COMMIT=$1 docker-compose up
+GIT_COMMIT=$1 docker-compose u
