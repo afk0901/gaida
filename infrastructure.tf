@@ -101,17 +101,17 @@ resource "aws_instance" "game_server" {
   # When Terraform connects through SSH, it gives the initialize script an execution
   #permission.
   #provisioner "remote-exec" {
-    inline = [
-      "chmod +x /home/ubuntu/initialize_game_api_instance.sh",
-    ]
+   # inline = [
+    #  "chmod +x /home/ubuntu/initialize_game_api_instance.sh",
+    #]
 
-    connection {
-      host        = coalesce(self.public_ip, self.private_ip)
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = file("~/.aws/GameKeyPair.pem")
-    }
-  }
+    #connection {
+     # host        = coalesce(self.public_ip, self.private_ip)
+      #type        = "ssh"
+      #user        = "ubuntu"
+      #private_key = file("~/.aws/GameKeyPair.pem")
+   # }
+  #}
 }
 
 # Gets the instance public IP address and stores it in the public_ip variable
