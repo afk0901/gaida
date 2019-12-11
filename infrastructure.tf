@@ -57,7 +57,7 @@ resource "aws_instance" "game_server" {
   key_name               = "GameKeyPair"
   vpc_security_group_ids = [aws_security_group.game_security_group.id]
   tags = {
-  Name = "GameServer_${var.environment}"
+    Name = "GameServer_${var.environment}"
   }
 
   # Adds the initialize script to a specific place in the instance
@@ -67,30 +67,30 @@ resource "aws_instance" "game_server" {
   #The host is found by getting the public IP address or private IP address
   #depending on wich one is defined, if both definded somehow, the public one
   #is used.
-  provisioner "file" {
-    source      = "scripts/initialize_game_api_instance.sh"
-    destination = "/home/ubuntu/initialize_game_api_instance.sh"
+  #provisioner "file" {
+   # source      = "scripts/initialize_game_api_instance.sh"
+    #destination = "/home/ubuntu/initialize_game_api_instance.sh"
 
-    connection {
-      host        = coalesce(self.public_ip, self.private_ip)
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = file("~/.aws/GameKeyPair.pem")
-    }
+    #connection {
+     # host        = coalesce(self.public_ip, self.private_ip)
+      #type        = "ssh"
+      #user        = "ubuntu"
+      #private_key = file("~/.aws/GameKeyPair.pem")
+    #}
   }
 
   # Adds the docker compose file to a specific place in the instance. 
   #Besides that, it does the same thing as the configuration above.
-  provisioner "file" {
-    source      = "docker-compose.yml"
-    destination = "/home/ubuntu/docker-compose.yml"
+  #provisioner "file" {
+   # source      = "docker-compose.yml"
+    #destination = "/home/ubuntu/docker-compose.yml"
 
-    connection {
-      host        = coalesce(self.public_ip, self.private_ip)
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = file("~/.aws/GameKeyPair.pem")
-    }
+    #connection {
+     # host        = coalesce(self.public_ip, self.private_ip)
+      #type        = "ssh"
+      #user        = "ubuntu"
+      #private_key = file("~/.aws/GameKeyPair.pem")
+    #}
   }
 
   # This is used to run commands on the instance we just created.
