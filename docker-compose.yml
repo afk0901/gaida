@@ -6,10 +6,10 @@ services:
     ports:
     - '3000:3000'
     depends_on:
-    - my_database_container
+    - ubuntu_my_database_container_1
     environment:
       PORT: 3000
-      POSTGRES_HOST: 'my_database_container'
+      POSTGRES_HOST: 'ubuntu_my_database_container_1'
       POSTGRES_DB: 'game_database'
       POSTGRES_USER: 'my_user'
       POSTGRES_PASSWORD: 'my_password'
