@@ -105,7 +105,7 @@ resource "aws_instance" "game_server" {
 
   #Adding game_api directory
   provisioner "file" {
-    source      = "./game_api/"
+    source      = "game_api/"
     destination = "/home/ubuntu/"
 
     connection {
