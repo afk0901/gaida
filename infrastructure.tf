@@ -103,12 +103,27 @@ resource "aws_instance" "game_server" {
     }
   }
 
-  #Adding game_api directory
+   provisioner "remote-exec" {
+    inline = [
+      "mkdir ./game_api",
+      "chmod +x /home/ubuntu/game_api/
+      "chmod +x /home/ubuntu/game_api/*",
+    ]
+
+    connection {
+      host        = coalesce(self.public_ip, self.private_ip)
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = file("~/.aws/GameKeyPair.pem")
+    }
+  }
+
+  #Adding game_api directory/home/ubuntu/game_api/
   provisioner "file" {
     source      = "/var/lib/jenkins/terraform/hgop/production/game_api"
     destination = "/home/ubuntu/game_api"
 
-    connection {
+    connection {/home/ubuntu/game_api/
       host        = coalesce(self.public_ip, self.private_ip)
       type        = "ssh"
       user        = "ubuntu"
@@ -127,8 +142,6 @@ resource "aws_instance" "game_server" {
     inline = [
       "chmod +x /home/ubuntu/initialize_game_api_instance.sh",
       "chmod +x /home/ubuntu/docker_compose_up.sh",
-      "mkdir ./game_api",
-      "chmod +x /home/ubuntu/game_api/*",
     ]
 
     connection {
