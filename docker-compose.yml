@@ -4,7 +4,7 @@ services:
   game_api:
     image: afk0901/game_api:${GIT_COMMIT}
     ports:
-    - '3000:3000'
+    - '4000:4000'
     depends_on:
     - my_database_container
     environment:

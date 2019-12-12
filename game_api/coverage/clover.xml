@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1576177944943" clover="3.2.0">
-  <project timestamp="1576177944943" name="All files">
+<coverage generated="1576180022169" clover="3.2.0">
+  <project timestamp="1576180022169" name="All files">
     <metrics statements="261" coveredstatements="111" conditionals="90" coveredconditionals="37" methods="62" coveredmethods="23" elements="413" coveredelements="171" complexity="0" loc="261" ncloc="261" packages="1" files="9" classes="9"/>
     <file name="config.js" path="/home/arnar/HagnytGaidaStjornunOgProfanir/game_api/config.js">
       <metrics statements="2" coveredstatements="1" conditionals="10" coveredconditionals="0" methods="1" coveredmethods="0"/>
