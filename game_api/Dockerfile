@@ -14,4 +14,5 @@ RUN npm install --production
 COPY *.js ./
 
 #Run app.js with NodeJS
-CMD node app.js
+#CMD node app.js
+
