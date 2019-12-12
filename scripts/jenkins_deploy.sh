@@ -17,12 +17,12 @@ cp docker-compose.yml /var/lib/jenkins/terraform/hgop/production/docker-compose.
 rm -f /var/lib/jenkins/terraform/hgop/production/*.tf
 cp ./*.tf /var/lib/jenkins/terraform/hgop/production/
 
-#cd into the Terraform path
+#cd into the Terraform path and set the environment
 cd $2
 ./terraform init # In case terraform is not initialized.
 ./terraform force-unlock
-./terraform destroy -auto-approve -var environment=production || exit 1
-./terraform apply -auto-approve -var environment=production  || exit 1
+./terraform destroy -auto-approve -var environment=$3 || exit 1
+./terraform apply -auto-approve -var environment=$3  || exit 1
 
 echo "Game API running at " + $(./terraform output public_ip)
 
