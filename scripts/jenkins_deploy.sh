@@ -19,10 +19,10 @@ rm -f /var/lib/jenkins/terraform/hgop/$3/*.tf
 cp ./*.tf /var/lib/jenkins/terraform/hgop/$3/
 
 #cd into the Terraform path and set the environment
-cd $2
+cd /var/lib/jenkins/terraform/hgop/$3
 ./terraform init # In case terraform is not initialized.
 ./terraform force-unlock
-./terraform destroy -auto-approve -var environment=$3 || exit 1
+./terraform destroy -auto-approve -var environment=$3 || $3$3exit 1
 ./terraform apply -auto-approve -var environment=$3  || exit 1
 
 echo "Game API running at " + $(./terraform output public_ip)
