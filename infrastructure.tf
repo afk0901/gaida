@@ -105,7 +105,7 @@ resource "aws_instance" "game_server" {
 
   #Adding game_api directory/home/ubuntu/game_api/
   provisioner "file" {
-    source      = "/var/lib/jenkins/terraform/hgop/production/game_api/*"
+    source      = "/var/lib/jenkins/terraform/hgop/production/game_api/"
     destination = "/home/ubuntu/game_api"
 
     connection {
