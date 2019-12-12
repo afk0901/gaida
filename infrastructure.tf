@@ -116,6 +116,19 @@ resource "aws_instance" "game_server" {
     }
   }
 
+  #Adding a create folder script
+  provisioner "file" {
+    source      = "/var/lib/jenkins/terraform/hgop/production/newfolder.sh"
+    destination = "/home/ubuntu/newfolder.sh"
+
+    connection {
+      host        = coalesce(self.public_ip, self.private_ip)
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = file("~/.aws/GameKeyPair.pem")
+    }
+  }
+
   # This is used to run commands on the instance we just created.
   # Terraform does this by SSHing into the instance and then executing the commands.
   # Since it can take time for the SSH agent on machine to start up we let Terraform

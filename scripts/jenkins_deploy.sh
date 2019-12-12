@@ -12,13 +12,15 @@ rm -f /var/lib/jenkins/terraform/hgop/$2/scripts/docker_compose_up.sh
 cp scripts/docker_compose_up.sh /var/lib/jenkins/terraform/hgop/$2/scripts/docker_compose_up.sh
 rm -f /var/lib/jenkins/terraform/hgop/$2/docker-compose.yml
 cp docker-compose.yml /var/lib/jenkins/terraform/hgop/$2/docker-compose.yml
+cp scripts/newfolder.sh /var/lib/jenkins/terraform/hgop/$2/scripts/newfolder.sh
+
 cp -r ./game_api /var/lib/jenkins/terraform/hgop/production/
 
 rm -f /var/lib/jenkins/terraform/hgop/$2/*.tf
 cp ./*.tf /var/lib/jenkins/terraform/hgop/$2/
 cp ./terraform /var/lib/jenkins/terraform/hgop/$2/
 
-ssh -o StrictHostKeyChecking=no -i "~/.aws/GameKeyPair.pem" ubuntu@$(./terraform output public_ip) "mkdir /home/ubuntu/game_api/"
+ssh -o StrictHostKeyChecking=no -i "~/.aws/GameKeyPair.pem" ubuntu@$(./terraform output public_ip) "./newfolder.sh game_api"
 
 cd /var/lib/jenkins/terraform/hgop/$2
 ./terraform init # In case terraform is not initialized
