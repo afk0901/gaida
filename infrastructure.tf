@@ -105,8 +105,8 @@ resource "aws_instance" "game_server" {
 
    provisioner "remote-exec" {
     inline = [
-      "mkdir ./game_api",
-      "chmod +x /home/ubuntu/game_api/"
+      "mkdir /home/ubuntu/game_api/game_api",
+      "chmod +x /home/ubuntu/game_api/",
       "chmod +x /home/ubuntu/game_api/*",
     ]
 
@@ -123,7 +123,7 @@ resource "aws_instance" "game_server" {
     source      = "/var/lib/jenkins/terraform/hgop/production/game_api"
     destination = "/home/ubuntu/game_api"
 
-    connection {/home/ubuntu/game_api/
+    connection {
       host        = coalesce(self.public_ip, self.private_ip)
       type        = "ssh"
       user        = "ubuntu"
