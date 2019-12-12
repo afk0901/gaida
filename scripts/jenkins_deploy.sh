@@ -32,8 +32,8 @@ ssh -o StrictHostKeyChecking=no -i "~/.aws/GameKeyPair.pem" ubuntu@$(./terraform
 #Runs api tests against the apitest instance
 if [ $2 == apitest ]
 then
-    
-    API_URL= $(./terraform output public_ip):3000 npm run test:api
+    ssh -o StrictHostKeyChecking=no -i "~/.aws/GameKeyPair.pem" ubuntu@$(./terraform output public_ip) 
+    "API_URL= API_URL=http://localhost:3000 npm run test:api"
 fi
 
 exit 0
