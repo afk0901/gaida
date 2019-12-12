@@ -2,16 +2,16 @@
 FROM node:erbium
 
 #Changing the working directory
-#WORKDIR /code
+WORKDIR /code
 
 #Copy package.json to the container
-#COPY package.json package.json 
+COPY package.json package.json 
 
-#COPY ./ /code
+COPY ./ /code
 
-#RUN npm install --production
+RUN npm install --production
 
-#COPY *.js ./
+COPY *.js ./
 
 #Run app.js with NodeJS
-#CMD node app.js
+CMD node app.js
