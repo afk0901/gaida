@@ -13,7 +13,6 @@ cp scripts/docker_compose_up.sh /var/lib/jenkins/terraform/hgop/$2/scripts/docke
 rm -f /var/lib/jenkins/terraform/hgop/$2/docker-compose.yml
 cp docker-compose.yml /var/lib/jenkins/terraform/hgop/$2/docker-compose.yml
 cp scripts/newfolder.sh /var/lib/jenkins/terraform/hgop/$2/scripts/newfolder.sh
-rm -r ./game_api/node_modules
 
 cp -r ./game_api /var/lib/jenkins/terraform/hgop/production/
 
@@ -22,6 +21,7 @@ cp ./*.tf /var/lib/jenkins/terraform/hgop/$2/
 cp ./terraform /var/lib/jenkins/terraform/hgop/$2/
 
 cd /var/lib/jenkins/terraform/hgop/$2
+ rm -r ./game_api/node_modules
 ./terraform init # In case terraform is not initialized
 ./terraform force-unlock
 ./terraform destroy -auto-approve -var environment=$2 || exit 1
