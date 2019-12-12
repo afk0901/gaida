@@ -20,7 +20,6 @@ cp ./terraform /var/lib/jenkins/terraform/hgop/$2/
 
 
 cd /var/lib/jenkins/terraform/hgop/$2
- rm -r ./game_api/node_modules
 ./terraform init # In case terraform is not initialized
 ./terraform force-unlock
 ./terraform destroy -auto-approve -var environment=$2 || exit 1
@@ -33,7 +32,7 @@ ssh -o StrictHostKeyChecking=no -i "~/.aws/GameKeyPair.pem" ubuntu@$(./terraform
 ssh -o StrictHostKeyChecking=no -i "~/.aws/GameKeyPair.pem" ubuntu@$(./terraform output public_ip) "./docker_compose_up.sh $GIT_COMMIT"
 
 #Runs api tests against the apitest instance
-if [ $2 == apitest ]
+if [ $2 == "apitest" ]
 then
   echo "APITEST - TEST SHOULD BE PLACE HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 fi  
