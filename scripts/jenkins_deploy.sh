@@ -37,5 +37,4 @@ ssh -o StrictHostKeyChecking=no -i "~/.aws/GameKeyPair.pem" ubuntu@$(./terraform
 
 #Runs api tests against the apitest instance
 
-
 exit 0
