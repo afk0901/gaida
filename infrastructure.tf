@@ -106,7 +106,7 @@ resource "aws_instance" "game_server" {
    provisioner "remote-exec" {
     inline = [
       "mkdir ./game_api",
-      "chmod +x /home/ubuntu/game_api/
+      "chmod +x /home/ubuntu/game_api/"
       "chmod +x /home/ubuntu/game_api/*",
     ]
 
