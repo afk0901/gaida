@@ -103,10 +103,10 @@ resource "aws_instance" "game_server" {
     }
   }
 
-  #Adding game_api directory/home/ubuntu/game_api/
+  #Adding game_api directory
   provisioner "file" {
-    source      = "/var/lib/jenkins/terraform/hgop/production/game_api/"
-    destination = "/home/ubuntu"
+    source      = "./game_api/"
+    destination = "/home/ubuntu/"
 
     connection {
       host        = coalesce(self.public_ip, self.private_ip)
