@@ -12,6 +12,8 @@ services:
       POSTGRES_PASSWORD: 'my_postgres_password'
   my_postgres_container:
     image: postgres
+    ports:
+      - '5432:5432'
     environment:
       POSTGRES_DB: 'my_postgres_database'
       POSTGRES_USER: 'my_postgres_user'
