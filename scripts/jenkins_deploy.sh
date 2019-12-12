@@ -13,7 +13,6 @@ cp scripts/docker_compose_up.sh /var/lib/jenkins/terraform/hgop/$2/scripts/docke
 rm -f /var/lib/jenkins/terraform/hgop/$2/docker-compose.yml
 cp docker-compose.yml /var/lib/jenkins/terraform/hgop/$2/docker-compose.yml
 
-
 rm -f /var/lib/jenkins/terraform/hgop/$2/*.tf
 cp ./*.tf /var/lib/jenkins/terraform/hgop/$2/
 cp ./terraform /var/lib/jenkins/terraform/hgop/$2/
