@@ -7,6 +7,6 @@ module.exports = function(context) {
     pgDatabase: process.env.POSTGRES_DB || 'default_database',
 
     // Port
-    port: process.env.PORT || 4000,
+    port: process.env.PORT || 3000,
   };
 };
