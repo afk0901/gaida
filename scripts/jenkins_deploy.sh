@@ -17,7 +17,8 @@ cp docker-compose.yml /var/lib/jenkins/terraform/hgop/production/docker-compose.
 rm -f /var/lib/jenkins/terraform/hgop/production/*.tf
 cp ./*.tf /var/lib/jenkins/terraform/hgop/production/
 
-cd /var/lib/jenkins/terraform/hgop/production
+#cd into the Terraform path
+cd $2
 ./terraform init # In case terraform is not initialized.
 ./terraform force-unlock
 ./terraform destroy -auto-approve -var environment=production || exit 1

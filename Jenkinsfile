@@ -41,7 +41,7 @@ node {
     }
 
     stage("Deploy") {
-        sh "./scripts/jenkins_deploy.sh ${git.GIT_COMMIT}"
+        sh "./scripts/jenkins_deploy.sh ${git.GIT_COMMIT} /var/lib/jenkins/terraform/hgop/production"
     }
 
     
