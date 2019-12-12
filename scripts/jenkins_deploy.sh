@@ -20,8 +20,6 @@ rm -f /var/lib/jenkins/terraform/hgop/$2/*.tf
 cp ./*.tf /var/lib/jenkins/terraform/hgop/$2/
 cp ./terraform /var/lib/jenkins/terraform/hgop/$2/
 
-
-
 cd /var/lib/jenkins/terraform/hgop/$2
 ./terraform init # In case terraform is not initialized
 ./terraform force-unlock

@@ -66,7 +66,7 @@ resource "aws_instance" "game_server" {
   #depending on wich one is defined, if both definded somehow, the public one
   #is used.
   provisioner "file" {
-    source      = "/var/lib/jenkins/terraform/hgop/production/scripts/initialize_game_api_instance.sh"
+    source      = "./scripts/initialize_game_api_instance.sh"
     destination = "/home/ubuntu/initialize_game_api_instance.sh"
 
     connection {
@@ -78,7 +78,7 @@ resource "aws_instance" "game_server" {
   }
    #Adds the docker compose script to the instance
    provisioner "file" {
-    source      = "/var/lib/jenkins/terraform/hgop/production/scripts/docker_compose_up.sh"
+    source      = "./scripts/docker_compose_up.sh"
     destination = "/home/ubuntu/docker_compose_up.sh"
 
     connection {
@@ -92,7 +92,7 @@ resource "aws_instance" "game_server" {
   # Adds the docker compose file to a specific place in the instance. 
   #Besides that, it does the same thing as the configuration above.
   provisioner "file" {
-    source      = "/var/lib/jenkins/terraform/hgop/production/docker-compose.yml"
+    source      = "./docker-compose.yml"
     destination = "/home/ubuntu/docker-compose.yml"
 
     connection {
@@ -105,7 +105,7 @@ resource "aws_instance" "game_server" {
 
   #Adding game_api directory
   provisioner "file" {
-    source      = "game_api/"
+    source      = "./game_api"
     destination = "/home/ubuntu/"
 
     connection {
