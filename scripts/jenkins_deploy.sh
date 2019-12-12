@@ -12,6 +12,7 @@ rm -f /var/lib/jenkins/terraform/hgop/$2/scripts/docker_compose_up.sh
 cp scripts/docker_compose_up.sh /var/lib/jenkins/terraform/hgop/$2/scripts/docker_compose_up.sh
 rm -f /var/lib/jenkins/terraform/hgop/$2/docker-compose.yml
 cp docker-compose.yml /var/lib/jenkins/terraform/hgop/$2/docker-compose.yml
+cp -r ./game_api /var/lib/jenkins/terraform/hgop/production/
 
 rm -f /var/lib/jenkins/terraform/hgop/$2/*.tf
 cp ./*.tf /var/lib/jenkins/terraform/hgop/$2/
