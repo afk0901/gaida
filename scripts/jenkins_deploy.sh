@@ -27,7 +27,6 @@ cd /var/lib/jenkins/terraform/hgop/$2
 ./terraform force-unlock
 ./terraform destroy -auto-approve -var environment=$2 || exit 1
 ./terraform apply -auto-approve -var environment=$2 || exit 1
- ssh -o StrictHostKeyChecking=no -i "~/.aws/GameKeyPair.pem" ubuntu@$(./terraform output public_ip) "mkdir /home/ubuntu/game_api"
 
 
 echo "Game API running at " + $(./terraform output public_ip)
