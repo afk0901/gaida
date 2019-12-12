@@ -16,6 +16,7 @@ cp docker-compose.yml /var/lib/jenkins/terraform/hgop/production/docker-compose.
 
 rm -f /var/lib/jenkins/terraform/hgop/production/*.tf
 cp ./*.tf /var/lib/jenkins/terraform/hgop/production/
+cp ./terraform /var/lib/jenkins/terraform/hgop/production/
 
 cd /var/lib/jenkins/terraform/hgop/production
 ./terraform init # In case terraform is not initialized.
