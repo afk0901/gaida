@@ -104,9 +104,9 @@ resource "aws_instance" "game_server" {
   }
 
   #Adding game_api directory
-  provisioner "file" {
+  provisioner "file" {/var/lib/jenkins/terraform/hgop/production/
     source      = "./game_api/*"
-    destination = "/home/ubuntu/"
+    destination = "/home/ubuntu/game_api"
 
     connection {
       host        = coalesce(self.public_ip, self.private_ip)
@@ -127,6 +127,7 @@ resource "aws_instance" "game_server" {
     inline = [
       "chmod +x /home/ubuntu/initialize_game_api_instance.sh",
       "chmod +x /home/ubuntu/docker_compose_up.sh",
+      "mkdir ./game_api"
       "chmod 777 /home/ubuntu/game_api/*",
     ]
 
