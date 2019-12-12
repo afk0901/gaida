@@ -23,9 +23,16 @@ cd /var/lib/jenkins/terraform/hgop/$2
 ./terraform destroy -auto-approve -var environment=$2 || exit 1
 ./terraform apply -auto-approve -var environment=$2  || exit 1
 
+
 echo "Game API running at " + $(./terraform output public_ip)
 
 ssh -o StrictHostKeyChecking=no -i "~/.aws/GameKeyPair.pem" ubuntu@$(./terraform output public_ip) "./initialize_game_api_instance.sh"
 ssh -o StrictHostKeyChecking=no -i "~/.aws/GameKeyPair.pem" ubuntu@$(./terraform output public_ip) "./docker_compose_up.sh $GIT_COMMIT"
+
+#Runs api tests against the apitest instance
+if [ $2 == "apitest" ]
+then
+    API_URL=./terraform output public_ip:3000 npm run test:api
+fi
 
 exit 0
