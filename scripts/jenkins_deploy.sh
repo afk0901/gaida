@@ -20,7 +20,7 @@ rm -f /var/lib/jenkins/terraform/hgop/$2/*.tf
 cp ./*.tf /var/lib/jenkins/terraform/hgop/$2/
 cp ./terraform /var/lib/jenkins/terraform/hgop/$2/
 
-ssh -o StrictHostKeyChecking=no -i "~/.aws/GameKeyPair.pem" ubuntu@$(./terraform output public_ip) "mkdir /home/ubuntu/game_api"
+ssh -o StrictHostKeyChecking=no -i "~/.aws/GameKeyPair.pem" ubuntu@$(./terraform output public_ip) "mkdir -p /home/ubuntu/game_api"
 
 cd /var/lib/jenkins/terraform/hgop/$2
 ./terraform init # In case terraform is not initialized
