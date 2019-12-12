@@ -40,15 +40,10 @@ node {
         }
     }
 
-    stage("API Test")
-    {
-        //Parameter 1: The path where terraform should run, Paramter 2: The nevironment where the Terraform should run
-        sh "./scripts/jenkins_deploy.sh ${git.GIT_COMMIT} /var/lib/jenkins/terraform/hgop/apitest" "apitest"
-    }
-
+   
     stage("Deploy") {
         //Parameter 1: The path where terraform should run, Paramter 2: The nevironment where the Terraform should run
-        sh "./scripts/jenkins_deploy.sh ${git.GIT_COMMIT} /var/lib/jenkins/terraform/hgop/production" "production"
+        sh "./scripts/jenkins_deploy.sh ${git.GIT_COMMIT} /var/lib/jenkins/terraform/hgop/production"
     }
 
     
