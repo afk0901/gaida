@@ -21,7 +21,6 @@ cp ./*.tf /var/lib/jenkins/terraform/hgop/$2/
 cp ./terraform /var/lib/jenkins/terraform/hgop/$2/
 
 cd /var/lib/jenkins/terraform/hgop/$2
- rm -r ./game_api/node_modules
 ./terraform init # In case terraform is not initialized
 ./terraform force-unlock
 ./terraform destroy -auto-approve -var environment=$2 || exit 1

@@ -42,6 +42,9 @@ node {
 
     stage("Deploy") {
         //Parameter 1: The path where terraform should run, Paramter 2: The enevironment where the Terraform should run
+        dir("game_api") {
+            sh  "rm -r ./game_api/node_modules"
+        }
         sh "./scripts/jenkins_deploy.sh ${git.GIT_COMMIT} production"
     }
 
