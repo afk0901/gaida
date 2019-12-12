@@ -32,7 +32,7 @@ ssh -o StrictHostKeyChecking=no -i "~/.aws/GameKeyPair.pem" ubuntu@$(./terraform
 ssh -o StrictHostKeyChecking=no -i "~/.aws/GameKeyPair.pem" ubuntu@$(./terraform output public_ip) "./docker_compose_up.sh $GIT_COMMIT"
 
 #Runs api tests against the apitest instance
-if [ $2 == "apitest" ]
+if [ $2 == apitest ]
 then
   echo "APITEST - TEST SHOULD BE PLACE HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 fi  
