@@ -19,8 +19,8 @@ cp ./terraform /var/lib/jenkins/terraform/hgop/$2/
 
 cd /var/lib/jenkins/terraform/hgop/$2
 ./terraform init # In case terraform is not initialized
- #./terraform force-unlock
-./terraform destroy -auto-approve -var environment=$2 || exit 1
+./terraform force-unlock
+./terraform destroy -auto-approve -var environment=$2 -var GIT_COMMIT=$GIT_COMMIT || exit 1
 ./terraform apply -auto-approve -var environment=$2 || exit 1
 
 
