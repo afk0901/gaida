@@ -40,7 +40,7 @@ then
 
   cd /var/lib/jenkins/workspace/Pipeline_project/game_api
   echo "API url is ${API_URL}"
-  API_URL="${API_URL}:3000" npm run test:api
+  API_URL="http://${API_URL}:3000" npm run test:api
   #./terraform destroy -auto-approve -var environment=$2 || exit 1
 fi  
 
