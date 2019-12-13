@@ -33,16 +33,25 @@ ssh -o StrictHostKeyChecking=no -i "~/.aws/GameKeyPair.pem" ubuntu@$(./terraform
 ssh -o StrictHostKeyChecking=no -i "~/.aws/GameKeyPair.pem" ubuntu@$(./terraform output public_ip) "./docker_compose_up.sh $GIT_COMMIT"
 
 #Runs api tests against the apitest instance
+API_URL=$(./terraform output public_ip)
+
 if [ $2 == apitest ]
 then
-  
-  API_URL=$(./terraform output public_ip)
-
   cd /var/lib/jenkins/workspace/Pipeline_project/game_api
   echo "API url is ${API_URL}"
   API_URL="http://${API_URL}:3000" npm run test:api
-  #./terraform destroy -auto-approve -var environment=$2 || exit 1
+  cd -
+  ./terraform destroy -auto-approve -var environment=$2 || exit 1
 fi  
+
+if [ $2 == capacitytest]
+then
+  cd /var/lib/jenkins/workspace/Pipeline_project/game_api
+  echo "API url is ${API_URL}"
+  API_URL="http://${API_URL}:3000" npm run test:capacity
+  cd -
+  ./terraform destroy -auto-approve -var environment=$2 || exit 1
+fi
 
 #Runs capacity tests against the capacitytest instance
 exit 0
