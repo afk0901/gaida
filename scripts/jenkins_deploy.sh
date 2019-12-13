@@ -37,10 +37,10 @@ if [ $2 == apitest ]
 then
   cd /var/lib/jenkins/workspace/Pipeline_project/game_api
   API_URL = $(./terraform output public_ip)
-  echo "API url is " + API_URL
-  API_URL="${API_URL}:3000" npm run test:api
+  echo "API url is " + $API_URL
+  API_URL="$API_URL:3000" npm run test:api
+  cd -
   ./terraform destroy -auto-approve -var environment=$2 || exit 1
-  cd - 
 fi  
 
 #Runs capacity tests against the capacitytest instance
