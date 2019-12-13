@@ -37,10 +37,11 @@ if [ $2 == apitest ]
 then
   
   API_URL=$(./terraform output public_ip)
-  echo "API url is ${API_URL}"
+  
   API_URL="${API_URL}:3000" 
   cd /var/lib/jenkins/workspace/Pipeline_project/game_api
-  npm run test:api
+  echo "API url is ${API_URL}"
+  API_URL npm run test:api
   #./terraform destroy -auto-approve -var environment=$2 || exit 1
 fi  
 
