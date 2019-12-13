@@ -39,8 +39,7 @@ then
   API_URL=$(./terraform output public_ip)
   echo "API url is " + $API_URL
   #API_URL="$API_URL:3000" npm run test:api
-  cd -
-  ./terraform destroy -auto-approve -var environment=$2 || exit 1
+  #./terraform destroy -auto-approve -var environment=$2 || exit 1
 fi  
 
 #Runs capacity tests against the capacitytest instance
