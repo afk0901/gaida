@@ -44,7 +44,7 @@ then
   ./terraform destroy -auto-approve -var environment=$2 || exit 1
 fi  
 
-if [ $2 == capacitytest]
+if [ $2 == capacitytest ]
 then
   cd /var/lib/jenkins/workspace/Pipeline_project/game_api
   echo "API url is ${API_URL}"
