@@ -39,4 +39,6 @@ then
   API_URL="${API_URL}:3000" npm run test:api
   ./terraform destroy -auto-approve -var environment=$2 || exit 1
 fi  
+
+#Runs capacity tests against the capacitytest instance
 exit 0
