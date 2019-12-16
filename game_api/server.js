@@ -87,14 +87,14 @@ module.exports = function(context) {
   // Player makes a guess that the next card will be 21 or under.
   app.post('/guess21OrUnder', (req, res) => {
     if (game) {
-      if (game.isGameOver(game)) {
+      if (game.isGameOver(game) /*/**/) {
         const msg = 'Game is already over';
         res.statusCode = 403;
         res.send(msg);
       } else {
         game.guess21OrUnder(game);
-        if (game.isGameOver(game)) {
-          const won = game.playerWon(game);
+        if (game.isGameOver(game) || game.playerWon(game)) {
+          const won =   game.getState(game).playerWon
           const score = game.getCardsValue(game);
           const total = game.getTotal(game);
           database.insertResult(won, score, total, () => {
@@ -116,13 +116,13 @@ module.exports = function(context) {
   // Player makes a guess that the next card will be over 21.
   app.post('/guessOver21', (req, res) => {
     if (game) {
-      if (game.isGameOver(game)) {
+      if (game.isGameOver(game) || game.playerWon(game)) {
         const msg = 'Game is already over';
         res.statusCode = 403;
         res.send(msg);
       } else {
         game.guessOver21(game);
-        if (game.isGameOver(game)) {
+        if (game.isGameOver(game) || playerWon(game)) {
           const won = game.getState(game).playerWon;
           const score = game.getCardsValue(game);
           const total = game.getTotal(game);
@@ -151,3 +151,4 @@ module.exports = function(context) {
     },
   };
 };
+
