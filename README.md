@@ -1,9 +1,5 @@
-# Hagnýt gæðastjórnun og prófanir
-Application URL:
-http://ec2-54-81-204-196.compute-1.amazonaws.com:3000/status
+Jenkins URL: http://ec2-34-230-65-127.compute-1.amazonaws.com:8080/ username: TA password: 12345
 
-http://ec2-34-230-65-127.compute-1.amazonaws.com:8080/
-username: TA
-password: 12345
+It's a possibility that the capacity tests shows the wrong timeout in Jenkins but still doing what it's supposed to do just look at the code! Also works locally.
 
-Note - You may have to cd into the scripts directory to run the scripts
+DataDog URL: https://app.datadoghq.eu/dashboard/uxt-u42-be4/arnars-screenboard-14-dec-2019-1312?from_ts=1576328380482&to_ts=1576331980482&live=true
